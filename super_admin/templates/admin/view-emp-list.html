@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      
+
+  </head>
+
+  <body>
+    <center><div><h2 class="bg-primary text-white">List of Employees</h2></div></center>
+    <table class="table">
+      <thead class="bg-danger text-white">
+        <tr>
+          <th>EMP ID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for emp in employees %}
+        <tr>
+          <td>{{emp.id}}</td>
+          <td>{{emp.first_name}}</td>
+          <td>{{emp.last_name}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.role}}</td>
+          <td>{{emp.email}}</td>
+          <td>{{emp.phone}}</td>
+          <td>
+            
+            <button class="btn-danger btn-sm" onclick="location.href='/delete-emp/{{emp.emp_id}}'">Delete</button>
+            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

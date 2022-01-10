@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      
+
+  </head>
+
+  <body>
+    <center><div><h2 class="bg-primary text-white">Task List</h2></div></center>
+    <table class="table">
+      <thead class="bg-danger text-white">
+        <tr>
+          <th>Task</th>
+          <th>From Time</th>
+          <th>To Time</th>
+          <th>Submitted Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in query %}
+        <tr>
+          <td>{{obj.task}}</td>
+          <td>{{obj.from_time}}</td>
+          <td>{{obj.to_time}}</td>
+          <td>{{obj.submitted_date}}</td>
+          <td>{{obj.is_approved}}</td>
+{#            {% if obj.is_approved %}#}
+{#                <td>{{ Approved }}</td>#}
+{#            {% else %}#}
+{#                <td>{{ Rejected }}</td>#}
+{#            {% endif %}#}
+          <td>
+            
+            <button class="btn-info btn-sm" onclick="location.href='/approve-task/{{obj.id}}'">Approve</button>
+            <button class="btn-danger btn-sm" onclick="location.href='/reject-task/{{obj.id}}'">Reject</button>
+{#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

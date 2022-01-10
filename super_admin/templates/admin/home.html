@@ -7,32 +7,29 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    {% if user.is_superuser %}
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
             <h5 style="color:red;">Hi {{ user.username }}!</h5>
             <h3 style="color: beige;">Welcome to the Employee Management System</h3>
             <p><a href="{% url 'logout' %}">Logout</a></p>
             <div>
-{#                <button class="btn-warning btn-lg" style="padding-right: 19%;" type="button"#}
-{#                        onclick="location.href='/comp'">Add Company#}
-{#                </button>#}
+                <button class="btn-danger btn-lg" onclick="location.href='/add_emp'">Add Employees</button>
                 <br><br>
-                <button class="btn-primary btn-lg" style="padding-right: 17%;" onclick="location.href='/add_emp'">Add
-                    Employees
-                </button>
+                <button class="btn-danger btn-lg" onclick="location.href='/view-emp-list'">View Employees</button>
                 <br><br>
-                <button class="btn-danger btn-lg" onclick="location.href='/showemp'">Manage Employees</button>
+                <button class="btn-success btn-lg" onclick="location.href='/add-asset'">Add Assets</button>
+                <br>
                 <br><br>
-                <button class="btn-success btn-lg" onclick="location.href='/show'">Manage Companies</button>
+                <button class="btn-success btn-lg" onclick="location.href='/view-asset-list'">View Assets</button>
                 <br>
             </div>
-        {% endif %}
+            {% endif %}
     {% else %}
         <div style="padding-bottom: 20%;">
-            <h2 style="color: burlywood;font-family: sans-serif;text-align: center;padding-bottom: 10%;">
+            <h2 style="color: burlywood;font-family: sans-serif;text-align: center;padding-bottom: 10%;"></h2>
                 Itsourcecode Employee Management System</h1>
-                <h5 style="color: beige;text-align: center;">You are not Logged in</h3>
-                    <a href="{% url 'login' %}">
+                <h5 style="color: beige;text-align: center;">You are not Logged in</h5>
+                    <a href="{% url 'login-a' %}">
                         <button class="btn-warning btn-lg" style="margin-left: 32%;">Login</button>
                     </a>
         </div>

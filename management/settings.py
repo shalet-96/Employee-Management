@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mirai',
+    'super_admin'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'super_admin.Employee'

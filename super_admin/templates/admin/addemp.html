@@ -15,17 +15,24 @@
           <h3 style="color: bisque;padding-top: 5%;">Add Employee Details</h3>
     <form method="POST" action="/add_emp">
       {% csrf_token %}
-
+        <div class="form-group">
+        <label class="form-label">User Name:</label>
+        <div>{{form.username}}</div>
+      </div>
+        <div class="form-group">
+        <label class="form-label">Password:</label>
+        <div>{{form.password}}</div>
+      </div>
       <div class="form-group">
         <label class="form-label">First Name:</label>
         <div>{{form.first_name}}</div>
-        <!--<<input type="text" value="{{form.First_name}}" />-->
+        <!--<<input type="text" value="{{form.first_name}}" />-->
       </div>
 
       <div class="form-group">
         <label class="form-label">Last Name:</label>
        <div>{{form.last_name}}</div>
-         <!--<input type="text" value="{{form.Last_name}}" />-->
+         <!--<input type="text" value="{{form.last_name}}" />-->
       </div>
 
       <div class="form-group">
@@ -42,13 +49,13 @@
         <div class="form-group">
         <label class="form-label">Employee Email:</label>
         <div>{{form.email}}</div>
-        <!--<input type="text" value="{{form.Email}}" />-->
+        <!--<input type="text" value="{{form.email}}" />-->
       </div>
 
       <div class="form-group">
         <label class="form-label">Employee phone:</label>
         <div>{{form.phone}}</div>
-        <!--<input type="text" value="{{form.Phone}}" />-->
+        <!--<input type="text" value="{{form.phone}}" />-->
       </div><br>
 
       <button type="submit" class="btn-success">Submit</button>

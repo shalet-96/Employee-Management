@@ -25,15 +25,15 @@ body {
   color: white;
 }
 
-.booking-form2 {
-  width: 41.67%;
-  background: rgba(14, 13, 13, 0.747);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding-left: 5%;
-  margin-left: 28%;
-  margin-top: 10%;
-}
+/*.booking-form2 {*/
+/*  !*width: 41.67%;*!*/
+/*  !*background: rgba(14, 13, 13, 0.747);*!*/
+/*  !*border-top-right-radius: 10px;*!*/
+/*  !*border-bottom-right-radius: 10px;*!*/
+/*  !*padding-left: 5%;*!*/
+/*  !*margin-left: 28%;*!*/
+/*  !*margin-top: 10%;*!*/
+/*}*/
 
 input {
   display: inline-block;
