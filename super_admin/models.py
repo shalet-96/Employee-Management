@@ -96,8 +96,8 @@ class ClaimManagement(models.Model):
 class TaskManagement(models.Model):
     emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
     task = models.CharField(max_length=250)
-    from_time = models.DateTimeField(null=True, blank=True)
-    to_time = models.DateTimeField(null=True, blank=True)
+    from_time = models.TimeField(null=True, blank=True)
+    to_time = models.TimeField(null=True, blank=True)
     is_submitted = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
     status = models.CharField(max_length=100, null=True, blank=True)

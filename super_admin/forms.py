@@ -19,6 +19,8 @@ class loginForm(forms.Form):
 
 
 class EmployeeForm(forms.ModelForm):
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput())
+
     class Meta:
         model = Employee
         fields = [
@@ -63,6 +65,9 @@ class AssetForm(forms.ModelForm):
 
 
 class LeaveRequestForm(forms.ModelForm):
+    from_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    to_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
     class Meta:
         model = LeaveManagement
         fields = [
@@ -92,8 +97,9 @@ class ClaimRequestForm(forms.ModelForm):
 
 
 class TaskSubmissionForm(forms.ModelForm):
-    from_time = forms.DateTimeField(required=False)
-    to_time = forms.DateTimeField(required=False)
+    from_time = forms.TimeField(required=False, widget=forms.widgets.TimeInput(attrs={'type': 'time'}))
+    to_time = forms.TimeField(required=False, widget=forms.widgets.TimeInput(attrs={'type': 'time'}))
+
     class Meta:
         model = TaskManagement
         fields = [
