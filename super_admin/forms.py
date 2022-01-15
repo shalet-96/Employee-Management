@@ -8,7 +8,14 @@ from .models import *
 
 class loginForm(forms.Form):
     username = forms.CharField(max_length=250)
-    password = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput())
+
+    def __init__(self, *args, **kwargs):
+        super(loginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['username'].widget.attrs['placeholder'] = 'Username'
+        self.fields['password'].widget.attrs['class'] = 'form-control'
+        self.fields['password'].widget.attrs['placeholder'] = 'Password'
 
 
 class EmployeeForm(forms.ModelForm):

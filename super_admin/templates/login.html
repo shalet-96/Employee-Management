@@ -12,26 +12,26 @@
             crossorigin="anonymous"></script>
 
 </head>
-<body>
-<div>
-    <div class="booking-form">
-        <h3 style="color: bisque;padding-top: 5%;">Login</h3>
-        <form method="POST" action="/login-a">
-            {% csrf_token %}
-            <div class="form-group">
-                <label class="form-label">User Name:</label>
-                <div>{{ form.username }}</div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Password:</label>
-                <div>{{ form.password }}</div>
-                <!--<<input type="text" value="{{form.password}}" />-->
-            </div>
-            <br>
-
-
-            <button type="submit" class="btn-success">Submit</button>
-        </form>
+<body class="text-center">
+<div style="padding-top: 17%;" class="d-flex justify-content-center ">
+    <div class=" card col-3" style="background-color: rgba(255,255,255,0.80)">
+        <div  class="card-body">
+            <div style="padding-bottom: 20px" class="row d-flex justify-content-center"><h3 style="color: #000000;">Log in to continue</h3></div>
+            <main class="form-signin">
+                <form method="POST" action="/login-a">
+                {% csrf_token %}
+                <div class="pb-5 form-floating">
+                        {{ form.username }}
+                </div>
+                <div class="form-floating">
+                    {{ form.password }}
+                </div>
+                    <div class="mt-5 row d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">LOGIN</button>
+                    </div>
+                </form>
+            </main>
+        </div>
     </div>
 </div>
 </body>
