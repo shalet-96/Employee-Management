@@ -34,7 +34,7 @@ class Employee(AbstractUser):
     def save(self, *args, **kwargs):
         print('saveeeeeeeeeee')
         if self.emp_id == None:
-            self.emp_id = uuid.uuid3()
+            self.emp_id = uuid.uuid4()
         super(Employee, self).save(*args, **kwargs)
 
     class Meta:
@@ -96,9 +96,10 @@ class ClaimManagement(models.Model):
 class TaskManagement(models.Model):
     emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
     task = models.CharField(max_length=250)
-    from_time = models.DateTimeField(null=True, blank=True)
-    to_time = models.DateTimeField(null=True, blank=True)
+    from_time = models.TimeField(null=True, blank=True)
+    to_time = models.TimeField(null=True, blank=True)
     is_submitted = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
-    submitted_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, null=True, blank=True)
+    submitted_date = models.DateTimeField(null=True, blank=True)
     approved_date = models.DateTimeField(null=True, blank=True)

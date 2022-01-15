@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<center>
+    <div><h2 class="bg-primary text-white">Task List</h2></div>
+</center>
+<table class="table">
+    <thead class="bg-danger text-white">
+    <tr>
+        <th>Task</th>
+        <th>From Time</th>
+        <th>To Time</th>
+        <th>Status After Submission</th>
+        <th>Approved/Rejected Date</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+    <td>{{ obj.task }}</td>
+    <td>{{ obj.from_time }}</td>
+    <td>{{ obj.to_time }}</td>
+        {% if  obj.is_approved %}
+            <td>{{ obj.status }}</td>
+            <td>{{ obj.approved_date }}</td>
+        {% else %}
+            {% if obj.status == 'Rejected' %}
+                <td>{{ obj.status }}</td>
+                <td>{{ obj.approved_date }}</td>
+                {% else %}
+                <td>Pending</td>
+                <td>Pending</td>
+                {% endif %}
+        {% endif %}
+    </tr>
+    </tbody>
+</table>
+<button class="btn-primary btn-lg" onclick="location.href='/view-task-list/{{ obj.emp.emp_id }}'">Back</button>
+</body>
+</html>

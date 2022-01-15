@@ -1,8 +1,9 @@
 from django.contrib import auth, messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm, LeaveRequestForm, loginForm, AssetForm, AssetRequestForm, ClaimRequestForm, \
     TaskSubmissionForm
-
+from datetime import datetime
 # Create your views here.
 from .models import LeaveManagement, Employee, AssetManagement, AssetRequest, ClaimManagement, TaskManagement
 
@@ -18,23 +19,28 @@ def loginCheck(request):
                 auth.login(request, user)
                 return redirect("/home")
             else:
-                messages.info(request, 'invalid credentials')
-                return redirect
+                return HttpResponse("Invalid Credentials")
         else:
             print('else condition')
-            emp = Employee.objects.get(username=username, password=password)
-            print('data', emp.emp_id, emp.username)
-            print('XXXX', request.user)
-            if emp is not None:
-                if emp.role == 'Manager':
-                    return redirect("manager-home", pk=emp.emp_id)
-                elif emp.role == 'HR':
-                    return redirect("/hr-home")
+            try:
+                emp = Employee.objects.get(username=username, password=password)
+                print('data', emp.emp_id, emp.username)
+                print('XXXX', request.user)
+                if emp is not None:
+                    if emp.role == 'Manager':
+                        return redirect("manager-home", pk=emp.emp_id)
+                    elif emp.role == 'HR':
+                        return redirect("hr-home", pk=emp.emp_id)
+                    else:
+                        return redirect("emp-home", pk=emp.emp_id)
                 else:
-                    return redirect("emp-home", pk=emp.emp_id)
-            else:
-                messages.info(request, 'invalid credentials')
-                return redirect
+                    messages.info(request, 'invalid credentials')
+
+                    return redirect
+            except:
+                # messages.info(request, 'invalid credentials')
+                return HttpResponse("Invalid Credentials")
+
     else:
         print('LOGINNNNNNNNNNNNNNNNNNN')
         form = loginForm()
@@ -48,8 +54,13 @@ def admin_home(request):
     return render(request, "admin/home.html")
 
 
-def hr_home(request):
-    return render(request, "admin/home.html")
+def hr_home(request, pk):
+    print("XXXXXXXXX", pk)
+    query = Employee.objects.get(emp_id=pk)
+    context = {
+        'obj': query
+    }
+    return render(request, "hr-home.html", context=context)
 
 
 def manager_home(request, pk):
@@ -121,8 +132,7 @@ def edit_emp(request, empid):
 
 def updateEmp(request, empid):
     employee = Employee.objects.get(emp_id=empid)
-    form = EmployeeForm(request.POST, instance=employee)
-    print('Hello1')
+    form = EmployeeForm(request.POST or None, instance=employee)
     if form.is_valid():
         form.save()
         return redirect("/view-emp-list")
@@ -142,7 +152,7 @@ def add_asset(request):
                     return redirect("view-asset-list")
                     # return True
                 except Exception as e:
-                    print('EXCEPYIOn', e)
+                    print('EXCEPTIOn', e)
 
                     pass
             else:
@@ -161,6 +171,26 @@ def add_asset(request):
 def view_asset_list(request):
     assets = AssetManagement.objects.all()
     return render(request, "admin/view-asset-list.html", {'assets': assets})
+
+
+def delete_asset(request, pk):
+    obj = AssetManagement.objects.get(id=pk)
+    obj.delete()
+    return redirect("/view-asset-list")
+
+
+def edit_asset(request, pk):
+    obj = AssetManagement.objects.get(id=pk)
+    return render(request, "admin/edit-asset.html", {'obj': obj})
+
+
+def update_asset(request, pk):
+    obj = AssetManagement.objects.get(id=pk)
+    form = AssetForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect("/view-asset-list")
+    return render(request, "admin/edit-asset.html", {'obj': obj})
 
 
 def add_leave_request(request, empid):
@@ -186,14 +216,14 @@ def add_leave_request(request, empid):
 
 def view_leave_request(request, pk):
     query = LeaveManagement.objects.filter(emp_id__emp_id=pk)
-    return render(request, "employee/view-leave-request.html", {'query': query})
+    return render(request, "leave/view-leave-request.html", {'query': query})
 
 
-# to do:
-def cancel_leave_request(request, pk):
-    query = LeaveManagement.objects.filter(id=pk)
-    query.delete()
-    return render(request, "employee/view-leave-request.html", {'query': query})
+def cancel_leave_request(request, empid):
+    obj = LeaveManagement.objects.get(id=empid)
+    emp_id = obj.emp_id.emp_id
+    obj.delete()
+    return redirect("view-leave-request", pk=emp_id)
 
 
 def show(request):
@@ -226,11 +256,11 @@ def view_asset_request(request, pk):
     return render(request, "asset/view-asset-request.html", {'query': query})
 
 
-# to do
-def cancel_asset_request(request, pk):
-    query = AssetRequest.objects.filter(id=pk)
-    query.delete()
-    return render(request, "employee/view-leave-request.html", {'query': query})
+def cancel_asset_request(request, empid):
+    obj = AssetRequest.objects.get(id=empid)
+    emp_id = obj.emp.emp_id
+    obj.delete()
+    return redirect("view-asset-request", pk=emp_id)
 
 
 def request_claim(request, empid):
@@ -256,15 +286,23 @@ def view_claim_request(request, pk):
     return render(request, "claim/view-claim-request.html", {'query': query})
 
 
-def submit_task(request, empid):
+def cancel_claim_request(request, empid):
+    obj = ClaimManagement.objects.get(id=empid)
+    emp_id = obj.emp.emp_id
+    obj.delete()
+    return redirect("view-claim-request", pk=emp_id)
+
+
+def add_task(request, empid):
+    print('empid', empid)
     query = Employee.objects.get(emp_id=empid)
     if request.method == "POST":
         form = TaskSubmissionForm(request.POST)
         if form.is_valid():
             form.instance.emp = query
-            form.instance.is_submitted = True
             form.save()
-            return redirect("view-task-list", pk=empid)
+            print('############ form saved')
+            return redirect("view-task-list", empid=empid)
     else:
         form = TaskSubmissionForm()
         context = {
@@ -274,9 +312,75 @@ def submit_task(request, empid):
         return render(request, "Task/submit-task.html", context=context)
 
 
-def view_task_list(request, pk):
-    query = TaskManagement.objects.filter(emp__emp_id=pk)
+def view_task_list(request, empid):
+    print('in view', empid)
+    print('task USER', request.user.username)
+    query = TaskManagement.objects.filter(emp__emp_id=empid)
     return render(request, "Task/view-task-list.html", {'query': query})
+
+
+def delete_task(request, empid):
+    obj = TaskManagement.objects.get(id=empid)
+    empid = obj.emp.emp_id
+    obj.delete()
+    return redirect("view-task-list", empid=empid)
+
+
+# To edit employee details
+def edit_task(request, empid):
+    obj = TaskManagement.objects.get(id=empid)
+    return render(request, "Task/edit-task.html", {'obj': obj})
+
+
+def update_task(request, empid):
+    print('UPDATES')
+    obj = TaskManagement.objects.get(id=empid)
+    query = Employee.objects.get(emp_id=obj.emp.emp_id)
+    print('OBJJJJ', obj)
+    form = TaskSubmissionForm(request.POST or None, instance=obj)
+    print('FORM', form)
+    print('form###', form.is_valid())
+    if form.is_valid():
+        print('TRUE', form.is_valid())
+        form.save()
+        return redirect("view-task-list", empid=obj.emp.emp_id)
+    return render(request, "Task/edit-task.html", {'obj': obj})
+
+
+def view_task_status(request, pk):
+    obj = TaskManagement.objects.get(id=pk)
+    return render(request, "Task/view-task-status.html", {'obj': obj})
+
+
+def submit_task(request, pk):
+    obj = TaskManagement.objects.get(id=pk)
+    obj.is_submitted = True
+    obj.submitted_date = datetime.now()
+    obj.save()
+    return redirect("view-task-list", empid=obj.emp.emp_id)
+
+
+def approve_task(request, empid):
+    obj = TaskManagement.objects.get(id=empid)
+    obj.is_approved = True
+    obj.status = 'Approved'
+    obj.approved_date = datetime.now()
+    obj.save()
+    return redirect("/view-submit-task")
+
+
+def view_submitted_task(request):
+    query = TaskManagement.objects.filter(is_submitted=True)
+    return render(request, "Task/view-submitted-tasks.html", {'query': query})
+
+
+def reject_task(request, empid):
+    obj = TaskManagement.objects.get(id=empid)
+    obj.is_approved = False
+    obj.status = 'Rejected'
+    obj.approved_date = datetime.now()
+    obj.save()
+    return redirect("/view-submit-task")
 
 
 def view_emp_leave_request(request):
@@ -300,25 +404,41 @@ def reject_leave(request, empid):
     return redirect("/view-requests")
 
 
-def approve_task(request, empid):
-    obj = TaskManagement.objects.get(id=empid)
-    obj.is_approved = True
-    obj.save()
-    return redirect("/view-submit-task")
-
-
-def view_submitted_task(request):
-    query = TaskManagement.objects.filter(is_submitted=True)
-    return render(request, "Task/view-submitted-tasks.html", {'query': query})
-
-
-def reject_task(request, empid):
-    obj = TaskManagement.objects.get(id=empid)
-    obj.is_approved = False
-    obj.save()
-    return redirect("/view-submit-task")
-
-
 def show_asset_request(request):
     query = AssetRequest.objects.all()
-    return render(request, "Task/view-submitted-tasks.html", {'query': query})
+    return render(request, "Asset/show-asset-request.html", {'query': query})
+
+
+def approve_asset_request(request, empid):
+    obj = AssetRequest.objects.get(id=empid)
+    obj.status = 'Approved'
+    obj.save()
+    return redirect("/show-asset-request")
+
+
+def reject_asset_request(request, empid):
+    obj = AssetRequest.objects.get(id=empid)
+    obj.status = 'Rejected'
+    obj.save()
+    return redirect("/show-asset-request")
+
+
+def show_claim_request(request):
+    query = ClaimManagement.objects.all()
+    return render(request, "Claim/show-claim-requests.html", {'query': query})
+
+
+def approve_claim_request(request, empid):
+    obj = ClaimManagement.objects.get(id=empid)
+    obj.status = 'Approved'
+    obj.approved_date = datetime.now()
+    obj.save()
+    return redirect("/show-claim-request")
+
+
+def reject_claim_request(request, empid):
+    obj = ClaimManagement.objects.get(id=empid)
+    obj.status = 'Rejected'
+    obj.approved_date = datetime.now()
+    obj.save()
+    return redirect("/show-claim-request")

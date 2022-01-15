@@ -13,7 +13,7 @@
     <div class="booking-form">
         <h3 style="color: bisque;padding-top: 5%;">Task Submission</h3>
 {#    <form method="POST" action="/request-leave/{{ empid }}" class="forma">#}
-    <form method="POST" action="/submit-task/{{empid}}">
+    <form method="POST" action="/create-task/{{empid}}">
       {% csrf_token %}
 
       <div class="form-group form-input">

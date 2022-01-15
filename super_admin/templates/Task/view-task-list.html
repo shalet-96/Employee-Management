@@ -15,8 +15,8 @@
           <th>Task</th>
           <th>From Time</th>
           <th>To Time</th>
+          <th>Current Status</th>
           <th>Submitted Date</th>
-{#          <th>Status</th>#}
           <th>Action</th>
         </tr>
       </thead>
@@ -26,15 +26,22 @@
           <td>{{obj.task}}</td>
           <td>{{obj.from_time}}</td>
           <td>{{obj.to_time}}</td>
-          <td>{{obj.submitted_date}}</td>
-{#          <td>{{obj.status}}</td>#}
-{#            {% if obj.approved_rejected %}#}
-{#                <td>Approved</td>#}
-{#            {% endif %}#}
+            {% if obj.is_submitted %}
+                <td>Submitted</td>
+                <td>{{obj.submitted_date}}</td>
+            {% else %}
+                <td>Pending</td>
+                <td>Not Submitted</td>
+            {% endif %}
+
           <td>
-            
-            <button class="btn-danger btn-sm" onclick="location.href='#'">Cancel</button>
-{#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
+              {% if not obj.is_submitted %}
+                <button class="btn-info btn-sm" onclick="location.href='/submit-task/{{ obj.id }}'">Submit To Manager</button>
+            <button class="btn-info btn-sm" onclick="location.href='/edit-task/{{ obj.id }}'">Edit</button>
+            <button class="btn-danger btn-sm" onclick="location.href='/delete-task/{{ obj.id }}'">Delete</button>
+                  {% else %}
+                  <button class="btn-danger btn-sm" onclick="location.href='/view-task-status/{{ obj.id }}'">View</button>
+              {% endif %}
           </td>
         </tr>
         {% endfor %}

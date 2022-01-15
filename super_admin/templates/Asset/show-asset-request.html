@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <center><div><h2 class="bg-primary text-white">Asset Request Status</h2></div></center>
+    <center><div><h2 class="bg-primary text-white">Task List</h2></div></center>
     <table class="table">
       <thead class="bg-danger text-white">
         <tr>
@@ -26,11 +26,10 @@
           <td>{{obj.purpose}}</td>
           <td>{{obj.request_date}}</td>
           <td>{{obj.status}}</td>
-{#            {% if obj.approved_rejected %}#}
-{#                <td>Approved</td>#}
-{#            {% endif %}#}
           <td>
-              <button class="btn-info btn-sm" onclick="location.href='/cancel-asset/{{obj.id}}'">Cancel</button>
+            
+            <button class="btn-info btn-sm" onclick="location.href='/approve-asset-request/{{obj.id}}'">Approve</button>
+            <button class="btn-danger btn-sm" onclick="location.href='/reject-asset-request/{{obj.id}}'">Reject</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
         </tr>
