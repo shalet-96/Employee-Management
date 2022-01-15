@@ -17,6 +17,7 @@
           <th>To Time</th>
           <th>Submitted Date</th>
           <th>Status</th>
+          <th>Approved/Rejected Date</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -27,18 +28,27 @@
           <td>{{obj.from_time}}</td>
           <td>{{obj.to_time}}</td>
           <td>{{obj.submitted_date}}</td>
-          <td>{{obj.is_approved}}</td>
-{#            {% if obj.is_approved %}#}
-{#                <td>{{ Approved }}</td>#}
-{#            {% else %}#}
-{#                <td>{{ Rejected }}</td>#}
-{#            {% endif %}#}
-          <td>
-            
-            <button class="btn-info btn-sm" onclick="location.href='/approve-task/{{obj.id}}'">Approve</button>
-            <button class="btn-danger btn-sm" onclick="location.href='/reject-task/{{obj.id}}'">Reject</button>
+            {% if  obj.is_approved %}
+            <td>{{ obj.status }}</td>
+            <td>{{ obj.approved_date }}</td>
+        {% else %}
+            {% if obj.status == 'Rejected' %}
+                <td>{{ obj.status }}</td>
+                <td>{{ obj.approved_date }}</td>
+                {% else %}
+                <td>Pending</td>
+                <td>Pending</td>
+                {% endif %}
+        {% endif %}
+            {% if not obj.status %}
+                <td>
+                <button class="btn-info btn-sm" onclick="location.href='/approve-task/{{obj.id}}'">Approve</button>
+                <button class="btn-danger btn-sm" onclick="location.href='/reject-task/{{obj.id}}'">Reject</button>
+                </td>{% else %}
+                <td>No Action</td>
+            {% endif %}
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
-          </td>
+
         </tr>
         {% endfor %}
       </tbody>

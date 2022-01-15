@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Employee System</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div>
+    <div class="booking-form3">
+        <h3 style="color: bisque;padding-top: 5%;">Update Task</h3>
+
+        <form method="POST" action="/update-task/{{ obj.id }}" class="forma">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label">Task:</label>
+                <input type="text" name="task" value="{{ obj.task }}"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">From Time:</label>
+                <input type="text" name="from_time" value="{{ obj.from_time }}"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">To Time:</label>
+
+                <input type="text" name="to_time" value="{{ obj.to_time }}"/>
+            </div>
+            <button type="submit" class="btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

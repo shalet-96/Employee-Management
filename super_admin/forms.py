@@ -67,6 +67,8 @@ class ClaimRequestForm(forms.ModelForm):
 
 
 class TaskSubmissionForm(forms.ModelForm):
+    from_time = forms.DateTimeField(required=False)
+    to_time = forms.DateTimeField(required=False)
     class Meta:
         model = TaskManagement
         fields = [

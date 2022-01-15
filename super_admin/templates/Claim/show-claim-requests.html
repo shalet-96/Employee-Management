@@ -8,14 +8,14 @@
   </head>
 
   <body>
-    <center><div><h2 class="bg-primary text-white">Leave Request Status</h2></div></center>
+    <center><div><h2 class="bg-primary text-white">Claim Request Status</h2></div></center>
     <table class="table">
       <thead class="bg-danger text-white">
         <tr>
-          <th>From Date</th>
-          <th>To date</th>
-          <th>Reason</th>
-          <th>Requested Date</th>
+          <th>Claim Type</th>
+          <th>Claim Name</th>
+          <th>Amount</th>
+          <th>Request Date</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -23,9 +23,9 @@
       <tbody>
         {% for obj in query %}
         <tr>
-          <td>{{obj.from_date}}</td>
-          <td>{{obj.to_date}}</td>
-          <td>{{obj.reason}}</td>
+          <td>{{obj.claim_type}}</td>
+          <td>{{obj.claim_name}}</td>
+          <td>{{obj.amount}}</td>
           <td>{{obj.request_date}}</td>
           <td>{{obj.status}}</td>
 {#            {% if obj.approved_rejected %}#}
@@ -33,7 +33,8 @@
 {#            {% endif %}#}
           <td>
             
-            <button class="btn-danger btn-sm" onclick="location.href='#'">Cancel</button>
+            <button class="btn-info btn-sm" onclick="location.href='/approve-claim-request/{{obj.id}}'">Approve</button>
+            <button class="btn-info btn-sm" onclick="location.href='/reject-claim-request/{{obj.id}}'">Reject</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
         </tr>

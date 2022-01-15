@@ -17,6 +17,7 @@
           <th>Amount</th>
           <th>Request Date</th>
           <th>Status</th>
+          <th>Approved Date</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -28,12 +29,13 @@
           <td>{{obj.amount}}</td>
           <td>{{obj.request_date}}</td>
           <td>{{obj.status}}</td>
+            <td>{{obj.approved_date}}</td>
 {#            {% if obj.approved_rejected %}#}
 {#                <td>Approved</td>#}
 {#            {% endif %}#}
           <td>
             
-            <button class="btn-danger btn-sm" onclick="location.href='#'">Cancel</button>
+            <button class="btn-danger btn-sm" onclick="location.href='/cancel-claim/{{obj.id}}'">Cancel</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
         </tr>

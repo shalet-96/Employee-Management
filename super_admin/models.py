@@ -100,5 +100,6 @@ class TaskManagement(models.Model):
     to_time = models.DateTimeField(null=True, blank=True)
     is_submitted = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
-    submitted_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, null=True, blank=True)
+    submitted_date = models.DateTimeField(null=True, blank=True)
     approved_date = models.DateTimeField(null=True, blank=True)
