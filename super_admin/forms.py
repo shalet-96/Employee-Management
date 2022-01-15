@@ -31,6 +31,23 @@ class EmployeeForm(forms.ModelForm):
             'email',
             'phone'
         ]
+    def __init__(self):
+        super(EmployeeForm, self).__init__()
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['username'].widget.attrs['placeholder'] = 'Username'
+        self.fields['password'].widget.attrs['class'] = 'form-control'
+        self.fields['password'].widget.attrs['placeholder'] = 'Password'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'First Name'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Last Name'
+        self.fields['department'].widget.attrs['class'] = 'form-control'
+        self.fields['department'].widget.attrs['placeholder'] = 'Department'
+        self.fields['role'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['placeholder'] = 'Email'
+        self.fields['phone'].widget.attrs['class'] = 'form-control'
+        self.fields['phone'].widget.attrs['placeholder'] = 'Phone'
 
 
 class AssetForm(forms.ModelForm):
