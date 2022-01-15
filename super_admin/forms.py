@@ -31,8 +31,9 @@ class EmployeeForm(forms.ModelForm):
             'email',
             'phone'
         ]
-    def __init__(self):
-        super(EmployeeForm, self).__init__()
+
+    def __init__(self, *args, **kwargs):
+        super(EmployeeForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
         self.fields['password'].widget.attrs['class'] = 'form-control'
