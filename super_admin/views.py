@@ -30,7 +30,7 @@ def loginCheck(request):
                     if emp.role == 'Manager':
                         return redirect("manager-home", pk=emp.emp_id)
                     elif emp.role == 'HR':
-                        return redirect("/hr-home")
+                        return redirect("hr-home", pk=emp.emp_id)
                     else:
                         return redirect("emp-home", pk=emp.emp_id)
                 else:
@@ -54,8 +54,13 @@ def admin_home(request):
     return render(request, "admin/home.html")
 
 
-def hr_home(request):
-    return render(request, "admin/home.html")
+def hr_home(request, pk):
+    print("XXXXXXXXX", pk)
+    query = Employee.objects.get(emp_id=pk)
+    context = {
+        'obj': query
+    }
+    return render(request, "hr-home.html", context=context)
 
 
 def manager_home(request, pk):
@@ -434,5 +439,6 @@ def approve_claim_request(request, empid):
 def reject_claim_request(request, empid):
     obj = ClaimManagement.objects.get(id=empid)
     obj.status = 'Rejected'
+    obj.approved_date = datetime.now()
     obj.save()
     return redirect("/show-claim-request")

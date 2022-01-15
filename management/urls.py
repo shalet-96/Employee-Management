@@ -56,6 +56,8 @@ urlpatterns = [
     path('show-claim-request', views_a.show_claim_request),
     path('approve-claim-request/<str:empid>', views_a.approve_claim_request),
     path('reject-claim-request/<str:empid>', views_a.reject_claim_request),
+    #HR
+    path(r'hr-home/(?P<pk>\d+)/$', views_a.hr_home, name="hr-home"),
 
     # employee
     path(r'emp-home/(?P<pk>\d+)/$', views_a.employee_home, name="emp-home"),

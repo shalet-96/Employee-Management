@@ -28,17 +28,17 @@
           <td>{{obj.from_time}}</td>
           <td>{{obj.to_time}}</td>
           <td>{{obj.submitted_date}}</td>
-            {% if  obj.is_approved %}
+        {% if  obj.is_approved %}
             <td>{{ obj.status }}</td>
             <td>{{ obj.approved_date }}</td>
         {% else %}
             {% if obj.status == 'Rejected' %}
                 <td>{{ obj.status }}</td>
                 <td>{{ obj.approved_date }}</td>
-                {% else %}
+            {% else %}
                 <td>Pending</td>
                 <td>Pending</td>
-                {% endif %}
+            {% endif %}
         {% endif %}
             {% if not obj.status %}
                 <td>

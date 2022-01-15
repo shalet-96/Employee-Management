@@ -17,6 +17,7 @@
           <th>Amount</th>
           <th>Request Date</th>
           <th>Status</th>
+          <th>Approved/Rejected Date</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -27,16 +28,28 @@
           <td>{{obj.claim_name}}</td>
           <td>{{obj.amount}}</td>
           <td>{{obj.request_date}}</td>
-          <td>{{obj.status}}</td>
-{#            {% if obj.approved_rejected %}#}
-{#                <td>Approved</td>#}
-{#            {% endif %}#}
+          {% if  obj.status == 'Approved' %}
+            <td>{{ obj.status }}</td>
+            <td>{{ obj.approved_date }}</td>
+            {% else %}
+            {% if obj.status == 'Rejected' %}
+                <td>{{ obj.status }}</td>
+                <td>{{ obj.approved_date }}</td>
+            {% else %}
+                <td>Pending</td>
+                <td>Pending</td>
+            {% endif %}
+        {% endif %}
+        {% if not obj.status %}
           <td>
             
             <button class="btn-info btn-sm" onclick="location.href='/approve-claim-request/{{obj.id}}'">Approve</button>
             <button class="btn-info btn-sm" onclick="location.href='/reject-claim-request/{{obj.id}}'">Reject</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
+            {% else %}
+                <td>No Action</td>
+        {% endif %}
         </tr>
         {% endfor %}
       </tbody>
