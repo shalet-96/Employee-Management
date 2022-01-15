@@ -79,6 +79,14 @@ urlpatterns = [
     path('edit-task/<str:empid>', views_a.edit_task),
     path('update-task/<str:empid>', views_a.update_task),
 
+    #Schedule
+    path('create-schedule', views_a.create_schedule),
+    path('view-schedule-list', views_a.schedule_list, name="view-schedule-list"),
+    path('view-schedule/<str:empid>', views_a.view_schedule),
+    path('delete-schedule/<str:empid>', views_a.delete_schedule),
+    path('edit-schedule/<str:empid>', views_a.edit_schedule),
+    path('update-schedule/<str:empid>', views_a.update_schedule),
+
     # Homepage path
     path('', TemplateView.as_view(template_name='admin/home.html'), name='home'),
 

@@ -17,7 +17,11 @@ STATUS = (
     ("Rejected", "Rejected"),
     ("Pending", "Pending"),
 )
-
+SHIFT_TYPE = (
+    ("Day", "Day"),
+    ("Night", "Night"),
+    ("Evening", "Evening"),
+)
 
 # Create your models here.
 class Employee(AbstractUser):
@@ -39,6 +43,16 @@ class Employee(AbstractUser):
 
     class Meta:
         db_table = "employee_1"
+
+
+class WorkSchedule(models.Model):
+    emp = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    schedule_date = models.DateField(auto_now=True)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    shift_type = models.CharField(max_length=50, choices=SHIFT_TYPE)
+    task_info = models.CharField(max_length=250)
+    is_scheduled = models.BooleanField(default=False)
 
 
 class LeaveManagement(models.Model):

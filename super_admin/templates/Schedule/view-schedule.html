@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+  </head>
+
+  <body>
+    <center><div><h2 class="bg-primary text-white">Schedule List</h2></div></center>
+    <table class="table">
+      <thead class="bg-danger text-white">
+        <tr>
+          <th>From Date</th>
+          <th>To Date</th>
+          <th>Shift Type</th>
+          <th>Task Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in query %}
+        <tr>
+          <td>{{obj.from_date}}</td>
+          <td>{{obj.to_date}}</td>
+          <td>{{obj.shift_type}}</td>
+          <td>{{obj.task_info}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

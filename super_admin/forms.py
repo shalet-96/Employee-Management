@@ -53,6 +53,23 @@ class EmployeeForm(forms.ModelForm):
         self.fields['phone'].widget.attrs['placeholder'] = 'Phone'
 
 
+class WorkScheduleForm(forms.ModelForm):
+    from_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    to_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    emp = forms.ModelChoiceField(queryset=Employee.objects.filter(role='Employee'))
+
+    class Meta:
+        model = WorkSchedule
+        fields = [
+            'emp',
+            'from_date',
+            'to_date',
+            'shift_type',
+            'task_info',
+            'is_scheduled',
+        ]
+
+
 class AssetForm(forms.ModelForm):
     class Meta:
         model = AssetManagement
