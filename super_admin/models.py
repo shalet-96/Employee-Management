@@ -34,7 +34,7 @@ class Employee(AbstractUser):
     def save(self, *args, **kwargs):
         print('saveeeeeeeeeee')
         if self.emp_id == None:
-            self.emp_id = uuid.uuid4()
+            self.emp_id = uuid.uuid3()
         super(Employee, self).save(*args, **kwargs)
 
     class Meta:
