@@ -17,36 +17,37 @@
     <div class="booking-form3">
         <h3 style="color: bisque;padding-top: 5%;">Update Schedule Details</h3>
 
-        <form method="POST" action="/update-schedule/{{ obj.id }}" class="forma">
+        <form method="POST" action="/update-schedule/{{ form.instance.id }}" class="forma">
             {% csrf_token %}
             <div class="form-group">
                 <label class="form-label">Assigned To:</label>
-                <input type="text" name="emp" value="{{ obj.emp.first_name }}"/>
+{#                <div>{{form.emp}}</div>#}
+                <input type="text" name="emp" value="{{ form.instance.emp.first_name }}"/>
             </div>
             <div class="form-group">
                 <label class="form-label">From Date:</label>
-                <input type="text" name="from_date" value="{{ obj.from_date }}"/>
+                <input type="text" name="from_date" value="{{ form.instance.from_date }}"/>
             </div>
             <div class="form-group">
                 <label class="form-label">To Date:</label>
 
-                <input type="text" name="to_date" value="{{ obj.to_date }}"/>
+                <input type="text" name="to_date" value="{{ form.instance.to_date }}"/>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Shift Type:</label>
 
-                <input type="text" name="shift_type" value="{{ obj.shift_type }}"/>
+                <input type="text" name="shift_type" value="{{ form.instance.shift_type }}"/>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Task Info:</label>
-                <input type="text" name="task_info" value="{{ obj.task_info }}"/>
+                <input type="text" name="task_info" value="{{ form.instance.task_info }}"/>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Is Scheduled:</label>
-                <input type="text" name="is_scheduled" value="{{ obj.is_scheduled }}"/>
+                <input type="text" name="is_scheduled" value="{{ form.instance.is_scheduled }}"/>
             </div>
             <br>
             <button type="submit" class="btn-success">Submit</button>

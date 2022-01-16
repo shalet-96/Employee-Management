@@ -479,16 +479,14 @@ def delete_schedule(request, empid):
 def edit_schedule(request, empid):
     print("edit", empid)
     obj = WorkSchedule.objects.get(id=empid)
-    return render(request, "Schedule/edit-schedule.html", {'obj': obj})
+    form = WorkScheduleForm(request.POST or None, instance=obj)
+    return render(request, "Schedule/edit-schedule.html", {'form': form})
 
 
 def update_schedule(request, empid):
-    print('in update', empid)
     obj = WorkSchedule.objects.get(id=empid)
-    print('xxxx', obj)
     form = WorkScheduleForm(request.POST or None, instance=obj)
-    print('formssss', form.is_valid())
     if form.is_valid():
         form.save()
         return redirect("view-schedule-list")
-    return render(request, "Schedule/edit-schedule.html", {'obj': obj})
+    return render(request, "Schedule/edit-schedule.html", {'form': form})
