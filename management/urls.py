@@ -15,13 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mirai import views
 from django.urls import include
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from mirai.views import *
-from super_admin.views import add_emp
 from super_admin import views as views_a
 
 urlpatterns = [
@@ -82,19 +79,13 @@ urlpatterns = [
     path('edit-task/<str:empid>', views_a.edit_task),
     path('update-task/<str:empid>', views_a.update_task),
 
-    # Company paths
-    path('comp', views.comp),
-    path('show', views.show),
-    path('edit/<str:cName>', views.edit),
-    path('update/<str:cName>', views.update),
-    path('delete/<str:cName>', views.delete),
-
-    # employee paths
-    path('emp', views.emp),
-    path('showemp', views.showemp),
-    path('deleteEmp/<str:eFname>', views.deleteEmp),
-    path('editemp/<str:eFname>', views.editemp),
-    path('updateEmp/<str:eFname>', views.updateEmp),
+    #Schedule
+    path('create-schedule', views_a.create_schedule),
+    path('view-schedule-list', views_a.schedule_list, name="view-schedule-list"),
+    path('view-schedule/<str:empid>', views_a.view_schedule),
+    path('delete-schedule/<str:empid>', views_a.delete_schedule),
+    path('edit-schedule/<str:empid>', views_a.edit_schedule),
+    path('update-schedule/<str:empid>', views_a.update_schedule),
 
     # Homepage path
     path('', TemplateView.as_view(template_name='admin/home.html'), name='home'),

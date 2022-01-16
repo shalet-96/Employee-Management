@@ -2,10 +2,11 @@ from django.contrib import auth, messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm, LeaveRequestForm, loginForm, AssetForm, AssetRequestForm, ClaimRequestForm, \
-    TaskSubmissionForm
+    TaskSubmissionForm, WorkScheduleForm
 from datetime import datetime
 # Create your views here.
-from .models import LeaveManagement, Employee, AssetManagement, AssetRequest, ClaimManagement, TaskManagement
+from .models import LeaveManagement, Employee, AssetManagement, AssetRequest, ClaimManagement, TaskManagement, \
+    WorkSchedule
 
 
 def loginCheck(request):
@@ -442,3 +443,50 @@ def reject_claim_request(request, empid):
     obj.approved_date = datetime.now()
     obj.save()
     return redirect("/show-claim-request")
+
+
+def create_schedule(request):
+    if request.method == "POST":
+        form = WorkScheduleForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect("view-schedule-list")
+            except Exception as e:
+                pass
+    else:
+        print('else')
+        form = WorkScheduleForm()
+    return render(request, "Schedule/create-schedule.html", {'form': form})
+
+
+def schedule_list(request):
+    query = WorkSchedule.objects.all()
+    return render(request, "Schedule/schedule-list.html", {'query': query})
+
+
+def view_schedule(request, empid):
+    query = WorkSchedule.objects.filter(emp__emp_id=empid)
+    return render(request, "Schedule/view-schedule.html", {'query': query})
+
+
+def delete_schedule(request, empid):
+    obj = WorkSchedule.objects.get(id=empid)
+    obj.delete()
+    return redirect("view-schedule-list")
+
+
+def edit_schedule(request, empid):
+    print("edit", empid)
+    obj = WorkSchedule.objects.get(id=empid)
+    form = WorkScheduleForm(request.POST or None, instance=obj)
+    return render(request, "Schedule/edit-schedule.html", {'form': form})
+
+
+def update_schedule(request, empid):
+    obj = WorkSchedule.objects.get(id=empid)
+    form = WorkScheduleForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect("view-schedule-list")
+    return render(request, "Schedule/edit-schedule.html", {'form': form})
