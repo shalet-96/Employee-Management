@@ -2,22 +2,32 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
     {% if user.is_authenticated %}
         {% if user.is_superuser %}
-            <div style="padding-top: 10px" class="d-flex justify-content-end">
-                <span><a class="btn btn-danger" href="{% url 'logout' %}">Logout</a></span>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Hi {{ user.username }}!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+    <div>
+        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+    <div class="container-fluid">
 
             <div class="d-flex flex-column vh-100 justify-content-center align-items-center text-center">
                <div>
 
-                   <span style="margin-bottom: 10%; background-color: rgba(255,255,255,0.53); font-size: 80pt; color:#414141;">Hello {{ user.username }}!</span>
-
-                <div class="d-flex justify-content-center" style="padding: 5%">
-
-                    <div style="padding: 5%"  class="row input-group">
-                        <button class="btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Employee Management</button>
+                    <div style="padding: 5%"  class="row input-group d-flex justify-content-center">
+                        <button style="width: 450px; height: 60px; font-size: x-large " class="btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Employee Management</button>
                         <div class="dropdown-menu">
                           <a class=" dropdown-item" href="#" onclick="location.href='/add_emp'">Add Employees</a>
                           <div role="separator" class="dropdown-divider"></div>
@@ -25,16 +35,14 @@
                         </div>
                     </div>
 
-
-                    <div style="padding: 5%" class="row input-group">
-                        <button class="btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Asset Management</button>
+                    <div style="padding: 5%" class="row input-group d-flex justify-content-center">
+                        <button style="width: 450px; height: 60px; font-size: x-large" class="btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Asset Management</button>
                         <div class="dropdown-menu">
                           <a class="dropdown-item" href="#" onclick="location.href='/add-asset'">Add assets</a>
                           <div role="separator" class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#" onclick="location.href='/view-asset-list'">View assets</a>
                         </div>
                     </div>
-                </div>
 
                </div>
             </div>
