@@ -69,6 +69,20 @@ class WorkScheduleForm(forms.ModelForm):
             'is_scheduled',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(WorkScheduleForm, self).__init__(*args, **kwargs)
+        self.fields['emp'].widget.attrs['class'] = 'form-control'
+        self.fields['emp'].widget.attrs['placeholder'] = 'Employee'
+        self.fields['from_date'].widget.attrs['class'] = 'form-control'
+        self.fields['from_date'].widget.attrs['placeholder'] = 'From date'
+        self.fields['to_date'].widget.attrs['class'] = 'form-control'
+        self.fields['to_date'].widget.attrs['placeholder'] = 'To Date'
+        self.fields['shift_type'].widget.attrs['class'] = 'form-control'
+        self.fields['shift_type'].widget.attrs['placeholder'] = 'Shift type'
+        self.fields['task_info'].widget.attrs['class'] = 'form-control'
+        self.fields['task_info'].widget.attrs['placeholder'] = 'Task info'
+
+
 
 class AssetForm(forms.ModelForm):
     class Meta:

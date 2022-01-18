@@ -10,42 +10,83 @@
 
   </head>
   <body>
-    <div>
-      <div class="booking-form">
-          <h3 style="color: bisque;padding-top: 5%;">Create Schedule</h3>
-    <form method="POST" action="/create-schedule">
-      {% csrf_token %}
-        <div class="form-group">
-        <label class="form-label">Employee Name:</label>
-        <div>{{form.emp}}</div>
-      </div>
-        <div class="form-group">
-        <label class="form-label">From Date:</label>
-        <div>{{form.from_date}}</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">To Date:</label>
-        <div>{{form.to_date}}</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Shift Type:</label>
-       <div>{{form.shift_type}}</div>
-      </div>
-        <br>
-        <div class="form-group">
-        <label class="form-label">Task Info:</label>
-       <div>{{form.task_info}}</div>
-      </div>
-        <br>
-        <div class="form-group">
-        <label class="form-label">Is Scheduled:</label>
-       <div>{{form.is_scheduled}}</div>
-      </div>
-        <br>
-
-      <button type="submit" class="btn-success">Submit</button>
-    </form>
-  </div></div>
+<div class="container-fluid">
+<div style="padding-top: 5%" class="d-flex flex-column vh-100 justify-content-center align-items-center text-center ">
+    <div class=" card col-3" style="background-color: rgba(255,255,255,0.80)">
+        <div  class="card-body">
+            <div style="padding-bottom: 20px" class="row d-flex justify-content-center"><h3 style="color: #000000;">Task Submission</h3></div>
+            <main class="form-signin">
+                <form method="POST" action="/create-schedule">
+                {% csrf_token %}
+                <div class="pb-2 form-floating">
+                    <label>Employee name</label>
+                        {{ form.emp }}
+                </div>
+                <div class="pb-2 form-floating">
+                    <label>From date</label>
+                    {{ form.from_date }}
+                </div>
+                <div class="pb-2 form-floating">
+                    <label>To date</label>
+                    {{ form.to_date }}
+                </div>
+                <div class="pb-2 form-floating">
+                    <label>Shift type</label>
+                    {{ form.shift_type }}
+                </div>
+                <div class="pb-5 form-floating">
+                    <label>Task Info</label>
+                    {{ form.task_info }}
+                </div>
+                <div class="pb-5 form-floating">
+                    <label>Is scheduled</label>
+                    {{ form.is_scheduled }}
+                </div>
+                    <div class="mt-5 row d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+    </div>
+{#    <div>#}
+{#      <div class="booking-form">#}
+{#          <h3 style="color: bisque;padding-top: 5%;">Create Schedule</h3>#}
+{#    <form method="POST" action="/create-schedule">#}
+{#      {% csrf_token %}#}
+{#        <div class="form-group">#}
+{#        <label class="form-label">Employee Name:</label>#}
+{#        <div>{{form.emp}}</div>#}
+{#      </div>#}
+{#        <div class="form-group">#}
+{#        <label class="form-label">From Date:</label>#}
+{#        <div>{{form.from_date}}</div>#}
+{#      </div>#}
+{#      <div class="form-group">#}
+{#        <label class="form-label">To Date:</label>#}
+{#        <div>{{form.to_date}}</div>#}
+{#      </div>#}
+{##}
+{#      <div class="form-group">#}
+{#        <label class="form-label">Shift Type:</label>#}
+{#       <div>{{form.shift_type}}</div>#}
+{#      </div>#}
+{#        <br>#}
+{#        <div class="form-group">#}
+{#        <label class="form-label">Task Info:</label>#}
+{#       <div>{{form.task_info}}</div>#}
+{#      </div>#}
+{#        <br>#}
+{#        <div class="form-group">#}
+{#        <label class="form-label">Is Scheduled:</label>#}
+{#       <div>{{form.is_scheduled}}</div>#}
+{#      </div>#}
+{#        <br>#}
+{##}
+{#      <button type="submit" class="btn-success">Submit</button>#}
+{#    </form>#}
+{#  </div></div>#}
   </body>
 </html>
