@@ -91,11 +91,6 @@ class AssetForm(forms.ModelForm):
         self.fields['no_of_item'].widget.attrs['class'] = 'form-control'
         self.fields['no_of_item'].widget.attrs['placeholder'] = 'Available quantity'
 
-
-
-
-
-
 class LeaveRequestForm(forms.ModelForm):
     from_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     to_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
@@ -165,3 +160,12 @@ class TaskSubmissionForm(forms.ModelForm):
             'from_time',
             'to_time',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super(TaskSubmissionForm, self).__init__(*args, **kwargs)
+        self.fields['task'].widget.attrs['class'] = 'form-control'
+        self.fields['task'].widget.attrs['placeholder'] = 'Task'
+        self.fields['from_time'].widget.attrs['class'] = 'form-control'
+        self.fields['from_time'].widget.attrs['placeholder'] = 'From Time'
+        self.fields['to_time'].widget.attrs['class'] = 'form-control'
+        self.fields['to_time'].widget.attrs['placeholder'] = 'To Time'
