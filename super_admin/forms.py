@@ -79,6 +79,21 @@ class AssetForm(forms.ModelForm):
             'no_of_item',
             'is_available'
         ]
+    def __init__(self, *args, **kwargs):
+        super(AssetForm, self).__init__(*args, **kwargs)
+
+        self.fields['item'].widget.attrs['class'] = 'form-control'
+        self.fields['item'].widget.attrs['placeholder'] = 'Item'
+
+        self.fields['description'].widget.attrs['class'] = 'form-control'
+        self.fields['description'].widget.attrs['placeholder'] = 'Description'
+
+        self.fields['no_of_item'].widget.attrs['class'] = 'form-control'
+        self.fields['no_of_item'].widget.attrs['placeholder'] = 'Available quantity'
+
+
+
+
 
 
 class LeaveRequestForm(forms.ModelForm):
