@@ -144,6 +144,15 @@ class ClaimRequestForm(forms.ModelForm):
             'amount',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(ClaimRequestForm, self).__init__(*args, **kwargs)
+        self.fields['claim_type'].widget.attrs['class'] = 'form-control'
+        self.fields['claim_type'].widget.attrs['placeholder'] = 'Claim Type'
+        self.fields['claim_name'].widget.attrs['class'] = 'form-control'
+        self.fields['claim_name'].widget.attrs['placeholder'] = 'Claim Name'
+        self.fields['amount'].widget.attrs['class'] = 'form-control'
+        self.fields['amount'].widget.attrs['placeholder'] = 'Amount'
+
 
 class TaskSubmissionForm(forms.ModelForm):
     from_time = forms.TimeField(required=False, widget=forms.widgets.TimeInput(attrs={'type': 'time'}))
