@@ -127,6 +127,13 @@ class AssetRequestForm(forms.ModelForm):
             'purpose'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(AssetRequestForm, self).__init__(*args, **kwargs)
+        self.fields['item'].widget.attrs['class'] = 'form-control'
+        self.fields['item'].widget.attrs['placeholder'] = 'Select item'
+        self.fields['purpose'].widget.attrs['class'] = 'form-control'
+        self.fields['purpose'].widget.attrs['placeholder'] = 'Purpose'
+
 
 class ClaimRequestForm(forms.ModelForm):
     class Meta:
