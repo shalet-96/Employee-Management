@@ -8,32 +8,77 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </head>
-  <body>
-      <div>
-    <div class="booking-form">
-        <h3 style="color: bisque;padding-top: 5%;">Request Leave Form</h3>
-        {{ empid }}
+  <body class="text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Hi {{ user.username }}!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+    <div>
+        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+<div class="container-fluid">
+<div style="padding-top: 5%" class="d-flex flex-column vh-100 justify-content-center align-items-center text-center ">
+    <div class=" card col-3" style="background-color: rgba(255,255,255,0.80)">
+        <div  class="card-body">
+            <div style="padding-bottom: 20px" class="row d-flex justify-content-center"><h3 style="color: #000000;">Request Leave</h3></div>
+            <main class="form-signin">
+                <form method="POST" action="/request-leave/{{empid}}">
+                {% csrf_token %}
+                <div class="pb-5 form-floating">
+                    <label>From date</label>
+                        {{ form.from_date }}
+                </div>
+                <div class="pb-5 form-floating">
+                    <label class="from-control">To date</label>
+                    {{ form.to_date }}
+                </div>
+                <div class="pb-5 form-floating">
+                    {{ form.reason }}
+                </div>
+                    <div class="mt-5 row d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+    </div>
+{#      <div>#}
+{#    <div class="booking-form">#}
+{#        <h3 style="color: bisque;padding-top: 5%;">Request Leave Form</h3>#}
+{#        {{ empid }}#}
 {#    <form method="POST" action="/request-leave/{{ empid }}" class="forma">#}
-    <form method="POST" action="/request-leave/{{empid}}">
-      {% csrf_token %}
-
-      <div class="form-group form-input">
-        <label class="form-label">From Date:</label>
-        <div>{{form.from_date}}</div>
-      </div>
-
-      <div class="form-group form-input">
-        <label class="form-label">To Date</label>
-        <div>{{form.to_date}}</div>
-      </div>
-
-      <div class="form-group form-input">
-        <label class="form-label">Reason:</label>
-        <div>{{form.reason}}</div>
-      </div>
-      <button type="submit" class="btn-success">Submit</button>
-    </form>
-</div>
-</div>
+{#    <form method="POST" action="/request-leave/{{empid}}">#}
+{#      {% csrf_token %}#}
+{##}
+{#      <div class="form-group form-input">#}
+{#        <label class="form-label">From Date:</label>#}
+{#        <div>{{form.from_date}}</div>#}
+{#      </div>#}
+{##}
+{#      <div class="form-group form-input">#}
+{#        <label class="form-label">To Date</label>#}
+{#        <div>{{form.to_date}}</div>#}
+{#      </div>#}
+{##}
+{#      <div class="form-group form-input">#}
+{#        <label class="form-label">Reason:</label>#}
+{#        <div>{{form.reason}}</div>#}
+{#      </div>#}
+{#      <button type="submit" class="btn-success">Submit</button>#}
+{#    </form>#}
+{#</div>#}
+{#</div>#}
   </body>
 </html>

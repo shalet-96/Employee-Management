@@ -108,6 +108,16 @@ class LeaveRequestForm(forms.ModelForm):
             'reason'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(LeaveRequestForm, self).__init__(*args, **kwargs)
+
+        self.fields['from_date'].widget.attrs['class'] = 'form-control'
+        self.fields['from_date'].widget.attrs['placeholder'] = 'From date'
+        self.fields['to_date'].widget.attrs['class'] = 'form-control'
+        self.fields['to_date'].widget.attrs['placeholder'] = 'To date'
+        self.fields['reason'].widget.attrs['class'] = 'form-control'
+        self.fields['reason'].widget.attrs['placeholder'] = 'Reason'
+
 
 class AssetRequestForm(forms.ModelForm):
     class Meta:
