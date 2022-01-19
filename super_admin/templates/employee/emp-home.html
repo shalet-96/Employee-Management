@@ -1,99 +1,76 @@
 {% extends 'base.html' %}
-{#<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"#}
-{#      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"#}
-{#        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"#}
-{#        crossorigin="anonymous"></script>#}
 {% block title %}Home{% endblock %}
 
 {% block content %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Hi {{ obj.first_name }}!</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Hi {{ obj.first_name }}!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#" >Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Work Schedule
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">No Link</a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Leaves
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/view-requests'">View</a></li>
-        </ul>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tasks
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/view-submit-task'">View</a></li>
-        </ul>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Asset
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/show-asset-request'">View Requests</a></li>
-        </ul>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Claims
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/show-claim-request'">View</a></li>
-        </ul>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          My Requests
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">No Link</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-    <div>
-        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
-    </div>
-</nav>
-{#    {% if user.is_authenticated %}#}
-
-            <div class="col-md-12">
-                <div class="col-md-3"><button class="btn-danger btn-lg" onclick="location.href='/view-schedule/{{ obj.emp_id }}'">View Schedule</button></div>
-                <div class="col-md-3"><button class="btn-success btn-lg" onclick="location.href='/request-leave/{{obj.emp_id}}'">Leave Request</button></div>
-                <div class="col-md-3"><button class="btn-danger btn-lg" onclick="location.href='/request-asset/{{obj.emp_id}}'">Asset Request</button></div>
-                <div class="col-md-3"><button class="btn-danger btn-lg" onclick="location.href='/request-claim/{{obj.emp_id}}'">Claim Request</button></div>
-
-                <div class="col-md-3"><button class="btn-success btn-lg" onclick="location.href='/view-task-list/{{obj.emp_id}}'">View TASK</button></div>
-                <div class="col-md-3"><button class="btn-success btn-lg" onclick="location.href='/create-task/{{obj.emp_id}}'">Create Task</button></div>
-                <br>
-            </div>
-
-
-{#    {% else %}#}
-{#        <div style="padding-bottom: 20%;">#}
-{#            <h2 style="color: burlywood;font-family: sans-serif;text-align: center;padding-bottom: 10%;"></h2>#}
-{#                Itsourcecode Employee Management System</h1>#}
-{#                <h5 style="color: beige;text-align: center;">You are not Logged in</h5>#}
-{#                    <a href="{% url 'login-a' %}">#}
-{#                        <button class="btn-warning btn-lg" style="margin-left: 32%;">Login</button>#}
-{#                    </a>#}
-{#        </div>#}
-{#    {% endif %}#}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Work Schedule
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'view-schedule' obj.emp_id %}">View Schedule</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Leave Management
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'request-leave' obj.emp_id %}">Request Leave</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-leave-request' obj.emp_id %}">View Leave
+                            Status</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Task Management
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'create-task' obj.emp_id %}">Create Task</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-task-list' obj.emp_id %}">View Task List</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Asset Management
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'request-asset' obj.emp_id %}">Request Asset</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-asset-request' obj.emp_id %}">View Asset
+                            Status</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Claim Management
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'request-claim' obj.emp_id %}">Request Claim</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-claim-request' obj.emp_id %}">View Claim
+                            Status</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
 {% endblock %}

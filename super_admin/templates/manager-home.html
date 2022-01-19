@@ -18,20 +18,21 @@
           Work Schedule
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">No Link</a></li>
+          <li><a class="dropdown-item" href="{% url 'create-schedule' %}">Create Schedule</a></li>
+            <li><a class="dropdown-item" href="{% url 'view-schedule-list' %}">View Schedule</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Leaves
+          Leave Management
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/view-requests'">View</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-requests' %}">View Leave Requests</a></li>
         </ul>
       </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tasks
+          Task Management
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="#" onclick="location.href='/view-submit-task'">View</a></li>
@@ -58,7 +59,12 @@
           My Requests
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">No Link</a></li>
+          <li><a class="dropdown-item" href="{% url 'request-leave' obj.emp_id %}">Request Leave</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-leave-request' obj.emp_id %}">View Leave Status</a></li>
+          <li><a class="dropdown-item" href="{% url 'request-claim' obj.emp_id %}">Request Claim</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-claim-request' obj.emp_id %}">View Claim Status</a></li>
+          <li><a class="dropdown-item" href="{% url 'request-asset' obj.emp_id %}">Request Asset</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-asset-request' obj.emp_id %}">View Asset Status</a></li>
         </ul>
       </li>
     </ul>
