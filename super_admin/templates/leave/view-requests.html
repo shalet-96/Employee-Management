@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
   </head>
 
   <body>
-    <center><div><h2 class="bg-primary text-white">Leave Requests From Employees</h2></div></center>
-    <table class="table">
-      <thead class="bg-danger text-white">
+        <div class="container-fluid">
+    <div class="text-center" style="margin-top: 5%; ">
+        <div style="margin-bottom: 30px; background-color: rgba(255,255,255,0.62)" class=" text-center"><h1
+                class="text-dark">List of Leave Requests</h1></div>
+        <div class="d-flex justify-content-center">
+        <table  style=" width: 90%" class="table table-striped table-dark">
+      <thead class="bg-secondary">
         <tr>
           <th>Emp ID</th>
           <th>From Date</th>
@@ -29,19 +37,24 @@
           <td>{{obj.to_date}}</td>
           <td>{{obj.reason}}</td>
           <td>{{obj.request_date}}</td>
-          <td>{{obj.status}}</td>
+          <td>
+              {{obj.status}}
+          </td>
 {#            {% if obj.approved_rejected %}#}
 {#                <td>Approved</td>#}
 {#            {% endif %}#}
           <td>
 
-            <button class="btn-danger btn-sm" onclick="location.href='/approve-leave/{{obj.id}}'">Approve</button>
-            <button class="btn-danger btn-sm" onclick="location.href='/reject-leave/{{ obj.id }}'">Reject</button>
+            <button class="btn btn-success btn-sm" onclick="location.href='/approve-leave/{{obj.id}}'">Approve</button>
+            <button class="btn btn-danger btn-sm" onclick="location.href='/reject-leave/{{ obj.id }}'">Reject</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+        </div>
+    </div>
+     </div>
   </body>
 </html>
