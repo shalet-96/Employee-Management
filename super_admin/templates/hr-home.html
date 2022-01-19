@@ -1,33 +1,60 @@
 {% extends 'base.html' %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{#    {% if user.is_authenticated %}#}
-            <h5 style="color:red;">Hi {{ obj.first_name }}!</h5>
-            <h3 style="color: beige;">Welcome to the Employee Management System</h3>
-            <p><a href="{% url 'logout' %}">Logout</a></p>
-            <div>
-                <button class="btn-success btn-lg" onclick="location.href='/show-claim-request'">Claim Management</button>
-                <button class="btn-success btn-lg" onclick="location.href='#'">My Requests</button>
-                <br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Hi {{ obj.first_name }}!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            </div>
-
-
-{#    {% else %}#}
-{#        <div style="padding-bottom: 20%;">#}
-{#            <h2 style="color: burlywood;font-family: sans-serif;text-align: center;padding-bottom: 10%;"></h2>#}
-{#                Itsourcecode Employee Management System</h1>#}
-{#                <h5 style="color: beige;text-align: center;">You are not Logged in</h5>#}
-{#                    <a href="{% url 'login-a' %}">#}
-{#                        <button class="btn-warning btn-lg" style="margin-left: 32%;">Login</button>#}
-{#                    </a>#}
-{#        </div>#}
-{#    {% endif %}#}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Claim Management
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="location.href='/show-claim-request'">View</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Requests
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'request-leave' obj.emp_id %}">Request Leave</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-leave-request' obj.emp_id %}">View Leave
+                            Status</a></li>
+                        <li><a class="dropdown-item" href="{% url 'request-claim' obj.emp_id %}">Request Claim</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-claim-request' obj.emp_id %}">View Claim
+                            Status</a></li>
+                        <li><a class="dropdown-item" href="{% url 'request-asset' obj.emp_id %}">Request Asset</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view-asset-request' obj.emp_id %}">View Asset
+                            Status</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Task Report
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Generate Report</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
 {% endblock %}
 
