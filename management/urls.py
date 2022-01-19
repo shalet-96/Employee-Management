@@ -46,7 +46,7 @@ urlpatterns = [
     path('approve-task/<str:empid>', views_a.approve_task),
     path('reject-task/<str:empid>', views_a.reject_task),
 
-    path('show-asset-request', views_a.show_asset_request),
+    path('show-asset-request/<str:empid>', views_a.show_asset_request, name='show-asset-request'),
     path('approve-asset-request/<str:empid>', views_a.approve_asset_request),
     path('reject-asset-request/<str:empid>', views_a.reject_asset_request),
 

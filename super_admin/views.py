@@ -411,9 +411,14 @@ def reject_leave(request, empid):
     return redirect("/view-requests")
 
 
-def show_asset_request(request):
+def show_asset_request(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = AssetRequest.objects.all()
-    return render(request, "Asset/show-asset-request.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj
+    }
+    return render(request, "Asset/show-asset-request.html", context=context)
 
 
 def approve_asset_request(request, empid):

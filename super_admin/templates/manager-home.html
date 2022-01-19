@@ -43,7 +43,7 @@
           Asset Management
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/show-asset-request'">View Requests</a></li>
+          <li><a class="dropdown-item" href="{% url 'show-asset-request' obj.emp_id %}">View Asset Requests</a></li>
         </ul>
       </li>
         <li class="nav-item dropdown">
