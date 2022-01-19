@@ -38,7 +38,7 @@ urlpatterns = [
     path('update-asset/<str:pk>', views_a.update_asset),
     # manager
     path(r'manager-home/(?P<pk>\d+)/$', views_a.manager_home, name="manager-home"),
-    path('view-requests', views_a.view_emp_leave_request, name='view-requests'),
+    path('view-requests/<str:empid>', views_a.view_emp_leave_request, name='view-requests'),
     path('approve-leave/<str:empid>', views_a.approve_leave),
     path('reject-leave/<str:empid>', views_a.reject_leave),
 

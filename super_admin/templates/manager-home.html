@@ -27,7 +27,7 @@
           Leave Management
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{% url 'view-requests' %}">View Leave Requests</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-requests' obj.emp_id %}">View Leave Requests</a></li>
         </ul>
       </li>
         <li class="nav-item dropdown">

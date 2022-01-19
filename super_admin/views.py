@@ -390,9 +390,14 @@ def reject_task(request, empid):
     return redirect("/view-submit-task")
 
 
-def view_emp_leave_request(request):
+def view_emp_leave_request(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = LeaveManagement.objects.all()
-    return render(request, "leave/view-requests.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "leave/view-requests.html", context=context)
 
 
 def approve_leave(request, empid):
