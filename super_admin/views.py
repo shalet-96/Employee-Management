@@ -217,8 +217,13 @@ def add_leave_request(request, empid):
 
 
 def view_leave_request(request, pk):
+    obj = Employee.objects.get(emp_id=pk)
     query = LeaveManagement.objects.filter(emp_id__emp_id=pk)
-    return render(request, "leave/view-leave-request.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj
+    }
+    return render(request, "leave/view-leave-request.html", context=context)
 
 
 def cancel_leave_request(request, empid):
