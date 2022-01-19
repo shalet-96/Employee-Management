@@ -13,35 +13,87 @@
 
 </head>
 <body>
-<div>
-    <div class="booking-form3">
-        <h3 style="color: bisque;padding-top: 5%;">Update Asset Details</h3>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Hi {{ user.username }}!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <form method="POST" action="/update-asset/{{ obj.id }}" class="forma">
-            {% csrf_token %}
-            <div class="form-group">
-                <label class="form-label">Item:</label>
-                <input type="text" name="item" value="{{ obj.item }}"/>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Description:</label>
-                <input type="text" name="description" value="{{ obj.description }}"/>
-            </div>
-            <div class="form-group">
-                <label class="form-label">No Of Item:</label>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+    <div>
+        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+<div class="container-fluid">
+<div style="padding-top: 5%" class="d-flex flex-column vh-100 justify-content-center align-items-center text-center ">
+    <div class=" card col-3" style="background-color: rgba(255,255,255,0.80)">
+        <div  class="card-body">
+            <div style="padding-bottom: 20px" class="row d-flex justify-content-center"><h3 style="color: #000000;">Add Asset</h3></div>
+            <main class="form-signin">
+                <form method="POST" action="/update-asset/{{ obj.id }}">
+                {% csrf_token %}
+                <div class="pb-5 form-floating">
+                <label>Item:</label>
+                <input  class="form-control" placeholder="Item" type="text" name="item" value="{{ obj.item }}"/>
+                </div>
+                <div class="pb-5 form-floating">
+                <label>Description:</label>
+                <input  class="form-control" placeholder="Description" type="text" name="description" value="{{ obj.description }}"/>
+                </div>
+                <div class="pb-5 form-floating">
+                <label>No Of Item:</label>
 
-                <input type="text" name="no_of_item" value="{{ obj.no_of_item }}"/>
-            </div>
+                <input  class="form-control" placeholder="Number of items" type="text" name="no_of_item" value="{{ obj.no_of_item }}"/>
+                </div>
+                <div class="pb-5 form-floating">
+                <label>Is Available:</label>
 
-            <div class="form-group">
-                <label class="form-label">Is Available:</label>
-
-                <input type="checkbox" name="is_available" value="{{ obj.is_available }}"/>
-            </div>
-
-            <button type="submit" class="btn-success">Submit</button>
-        </form>
+                <input class="form-control" type="checkbox" name="is_available" value="{{ obj.is_available }}"/>
+                </div>
+                    <div class="mt-5 row d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </main>
+        </div>
     </div>
 </div>
+    </div>
+{#<div>#}
+{#    <div class="booking-form3">#}
+{#        <h3 style="color: bisque;padding-top: 5%;">Update Asset Details</h3>#}
+{##}
+{#        <form method="POST" action="/update-asset/{{ obj.id }}" class="forma">#}
+{#            {% csrf_token %}#}
+{#            <div class="form-group">#}
+{#                <label class="form-label">Item:</label>#}
+{#                <input type="text" name="item" value="{{ obj.item }}"/>#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <label class="form-label">Description:</label>#}
+{#                <input type="text" name="description" value="{{ obj.description }}"/>#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <label class="form-label">No Of Item:</label>#}
+{##}
+{#                <input type="text" name="no_of_item" value="{{ obj.no_of_item }}"/>#}
+{#            </div>#}
+{##}
+{#            <div class="form-group">#}
+{#                <label class="form-label">Is Available:</label>#}
+{##}
+{#                <input type="checkbox" name="is_available" value="{{ obj.is_available }}"/>#}
+{#            </div>#}
+{##}
+{#            <button type="submit" class="btn-success">Submit</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
 </body>
 </html>
