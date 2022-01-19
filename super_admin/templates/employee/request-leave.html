@@ -13,7 +13,7 @@
 </head>
 <body class="text-center">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Hi {{ user.username }}!</a>
+    <a class="navbar-brand" href="#">Hi {{ obj.first_name }}!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'emp-home' empid %}">Back To Home <span class="sr-only">(current)</span></a>
+                {% if obj.role == 'Employee' %}
+                    <a class="nav-link" href="{% url 'emp-home' empid %}">Back To Home <span class="sr-only">(current)</span></a>
+                {% elif obj.role == 'Manager' %}
+                    <a class="nav-link" href="{% url 'manager-home' empid %}">Back To Home <span class="sr-only">(current)</span></a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'hr-home' empid %}">Back To Home <span class="sr-only">(current)</span></a>
+                {% endif %}
             </li>
         </ul>
     </div>

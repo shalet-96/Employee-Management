@@ -210,7 +210,8 @@ def add_leave_request(request, empid):
         form = LeaveRequestForm()
         context = {
             'form': form,
-            'empid': empid
+            'empid': empid,
+            'obj': query,
         }
         return render(request, "employee/request-leave.html", context=context)
 
@@ -445,7 +446,8 @@ def reject_claim_request(request, empid):
     return redirect("/show-claim-request")
 
 
-def create_schedule(request):
+def create_schedule(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     if request.method == "POST":
         form = WorkScheduleForm(request.POST)
         if form.is_valid():
@@ -457,12 +459,21 @@ def create_schedule(request):
     else:
         print('else')
         form = WorkScheduleForm()
-    return render(request, "Schedule/create-schedule.html", {'form': form})
+        context = {
+            'form': form,
+            'obj': obj,
+        }
+    return render(request, "Schedule/create-schedule.html", context=context)
 
 
-def schedule_list(request):
+def schedule_list(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = WorkSchedule.objects.all()
-    return render(request, "Schedule/schedule-list.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "Schedule/schedule-list.html", context=context)
 
 
 def view_schedule(request, empid):
