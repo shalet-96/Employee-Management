@@ -38,7 +38,7 @@ urlpatterns = [
     path('update-asset/<str:pk>', views_a.update_asset),
     # manager
     path(r'manager-home/(?P<pk>\d+)/$', views_a.manager_home, name="manager-home"),
-    path('view-requests', views_a.view_emp_leave_request),
+    path('view-requests', views_a.view_emp_leave_request, name='view-requests'),
     path('approve-leave/<str:empid>', views_a.approve_leave),
     path('reject-leave/<str:empid>', views_a.reject_leave),
 
@@ -59,14 +59,14 @@ urlpatterns = [
     # employee
     path(r'emp-home/(?P<pk>\d+)/$', views_a.employee_home, name="emp-home"),
     path(r'view-leave-request/(?P<pk>\d+)/$', views_a.view_leave_request, name='view-leave-request'),
-    path('request-leave/<str:empid>', views_a.add_leave_request),
+    path('request-leave/<str:empid>', views_a.add_leave_request, name='request-leave'),
     path('cancel-leave/<str:empid>', views_a.cancel_leave_request),
 
-    path('request-asset/<str:empid>', views_a.request_asset),
+    path('request-asset/<str:empid>', views_a.request_asset, name='request-asset'),
     path(r'view-asset-request/(?P<pk>\d+)/$', views_a.view_asset_request, name='view-asset-request'),
     path('cancel-asset/<str:empid>', views_a.cancel_asset_request),
 
-    path('request-claim/<str:empid>', views_a.request_claim),
+    path('request-claim/<str:empid>', views_a.request_claim, name='request-claim'),
     path(r'view-claim-request/(?P<pk>\d+)/$', views_a.view_claim_request, name='view-claim-request'),
     path('cancel-claim/<str:empid>', views_a.cancel_claim_request),
 
@@ -80,7 +80,7 @@ urlpatterns = [
     path('update-task/<str:empid>', views_a.update_task),
 
     #Schedule
-    path('create-schedule', views_a.create_schedule),
+    path('create-schedule', views_a.create_schedule, name='create-schedule'),
     path('view-schedule-list', views_a.schedule_list, name="view-schedule-list"),
     path('view-schedule/<str:empid>', views_a.view_schedule),
     path('delete-schedule/<str:empid>', views_a.delete_schedule),
