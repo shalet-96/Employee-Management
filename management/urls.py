@@ -50,7 +50,7 @@ urlpatterns = [
     path('approve-asset-request/<str:empid>', views_a.approve_asset_request),
     path('reject-asset-request/<str:empid>', views_a.reject_asset_request),
 
-    path('show-claim-request', views_a.show_claim_request),
+    path('show-claim-request', views_a.show_claim_request, name='show-claim-request'),
     path('approve-claim-request/<str:empid>', views_a.approve_claim_request),
     path('reject-claim-request/<str:empid>', views_a.reject_claim_request),
     #HR

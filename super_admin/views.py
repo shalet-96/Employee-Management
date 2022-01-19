@@ -210,7 +210,8 @@ def add_leave_request(request, empid):
         form = LeaveRequestForm()
         context = {
             'form': form,
-            'empid': empid
+            'empid': empid,
+            'obj': query,
         }
         return render(request, "employee/request-leave.html", context=context)
 
