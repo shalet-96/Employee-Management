@@ -35,7 +35,7 @@
           Task Management
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#" onclick="location.href='/view-submit-task'">View</a></li>
+          <li><a class="dropdown-item" href="{% url 'view-submit-task' obj.emp_id %}" >View Task</a></li>
         </ul>
       </li>
         <li class="nav-item dropdown">

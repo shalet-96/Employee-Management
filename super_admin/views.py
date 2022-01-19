@@ -371,9 +371,14 @@ def approve_task(request, empid):
     return redirect("/view-submit-task")
 
 
-def view_submitted_task(request):
+def view_submitted_task(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = TaskManagement.objects.filter(is_submitted=True)
-    return render(request, "Task/view-submitted-tasks.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "Task/view-submitted-tasks.html", context=context)
 
 
 def reject_task(request, empid):

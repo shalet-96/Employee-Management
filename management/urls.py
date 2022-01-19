@@ -42,7 +42,7 @@ urlpatterns = [
     path('approve-leave/<str:empid>', views_a.approve_leave),
     path('reject-leave/<str:empid>', views_a.reject_leave),
 
-    path('view-submit-task', views_a.view_submitted_task),
+    path('view-submit-task/<str:empid>', views_a.view_submitted_task, name='view-submit-task'),
     path('approve-task/<str:empid>', views_a.approve_task),
     path('reject-task/<str:empid>', views_a.reject_task),
 
