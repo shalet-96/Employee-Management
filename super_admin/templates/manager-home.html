@@ -18,8 +18,8 @@
           Work Schedule
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{% url 'create-schedule' %}">Create Schedule</a></li>
-            <li><a class="dropdown-item" href="{% url 'view-schedule-list' %}">View Schedule</a></li>
+          <li><a class="dropdown-item" href="{% url 'create-schedule' obj.emp_id %}">Create Schedule</a></li>
+            <li><a class="dropdown-item" href="{% url 'view-schedule-list' obj.emp_id %}">View Schedule</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
