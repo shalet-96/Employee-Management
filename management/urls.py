@@ -72,7 +72,7 @@ urlpatterns = [
 
     # TASK
     path('view-task-list/<str:empid>', views_a.view_task_list, name='view-task-list'),
-    path('create-task/<str:empid>', views_a.add_task),
+    path('create-task/<str:empid>', views_a.add_task, name='create-task'),
     path('submit-task/<str:pk>', views_a.submit_task),
     path('view-task-status/<str:pk>', views_a.view_task_status),
     path('delete-task/<str:empid>', views_a.delete_task),
@@ -82,7 +82,7 @@ urlpatterns = [
     #Schedule
     path('create-schedule', views_a.create_schedule, name='create-schedule'),
     path('view-schedule-list', views_a.schedule_list, name="view-schedule-list"),
-    path('view-schedule/<str:empid>', views_a.view_schedule),
+    path('view-schedule/<str:empid>', views_a.view_schedule, name='view-schedule'),
     path('delete-schedule/<str:empid>', views_a.delete_schedule),
     path('edit-schedule/<str:empid>', views_a.edit_schedule),
     path('update-schedule/<str:empid>', views_a.update_schedule),
