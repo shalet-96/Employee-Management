@@ -239,13 +239,12 @@ def show(request):
 
 
 def request_asset(request, empid):
-    query = Employee.objects.get(emp_id=empid)
-    print('xxx', query)
+    obj = Employee.objects.get(emp_id=empid)
     if request.method == "POST":
         print('POST')
         form = AssetRequestForm(request.POST)
         if form.is_valid():
-            form.instance.emp = query
+            form.instance.emp = obj
             form.instance.status = 'Pending'
             form.save()
             return redirect("view-asset-request", pk=empid)
@@ -253,14 +252,20 @@ def request_asset(request, empid):
         form = AssetRequestForm()
         context = {
             'form': form,
-            'empid': empid
+            'empid': empid,
+            'obj': obj,
         }
         return render(request, "asset/request-asset.html", context=context)
 
 
 def view_asset_request(request, pk):
+    obj = Employee.objects.get(emp_id=pk)
     query = AssetRequest.objects.filter(emp__emp_id=pk)
-    return render(request, "asset/view-asset-request.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj
+    }
+    return render(request, "asset/view-asset-request.html", context=context)
 
 
 def cancel_asset_request(request, empid):
