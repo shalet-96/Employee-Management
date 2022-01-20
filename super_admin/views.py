@@ -312,12 +312,11 @@ def cancel_claim_request(request, empid):
 
 
 def add_task(request, empid):
-    print('empid', empid)
-    query = Employee.objects.get(emp_id=empid)
+    obj = Employee.objects.get(emp_id=empid)
     if request.method == "POST":
         form = TaskSubmissionForm(request.POST)
         if form.is_valid():
-            form.instance.emp = query
+            form.instance.emp = obj
             form.save()
             print('############ form saved')
             return redirect("view-task-list", empid=empid)
@@ -325,16 +324,20 @@ def add_task(request, empid):
         form = TaskSubmissionForm()
         context = {
             'form': form,
-            'empid': empid
+            'empid': empid,
+            'obj': obj,
         }
         return render(request, "Task/submit-task.html", context=context)
 
 
 def view_task_list(request, empid):
-    print('in view', empid)
-    print('task USER', request.user.username)
+    obj = Employee.objects.get(emp_id=empid)
     query = TaskManagement.objects.filter(emp__emp_id=empid)
-    return render(request, "Task/view-task-list.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "Task/view-task-list.html", context=context)
 
 
 def delete_task(request, empid):
