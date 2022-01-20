@@ -1,33 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
 
-  </head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Hi {{ obj.first_name }}!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <body>
-    <center><div><h2 class="bg-primary text-white">Schedule List</h2></div></center>
-    <table class="table">
-      <thead class="bg-danger text-white">
-        <tr>
-          <th>From Date</th>
-          <th>To Date</th>
-          <th>Shift Type</th>
-          <th>Task Info</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for obj in query %}
-        <tr>
-          <td>{{obj.from_date}}</td>
-          <td>{{obj.to_date}}</td>
-          <td>{{obj.shift_type}}</td>
-          <td>{{obj.task_info}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </body>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+
+                <a class="nav-link" href="{% url 'emp-home' obj.emp_id %}">Back To Home <span class="sr-only">(current)</span></a>
+
+            </li>
+        </ul>
+    </div>
+    <div>
+        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="text-center" style="margin-top: 5%; ">
+        <div style="margin-bottom: 30px; background-color: rgba(255,255,255,0.62)" class=" text-center"><h1
+                class="text-dark">Schedule List</h1></div>
+        <div class="d-flex justify-content-center">
+            <table style=" width: 90%" class="table table-striped table-dark">
+                <thead class="bg-secondary">
+                <tr>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Shift Type</th>
+                    <th>Task Info</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in query %}
+                    <tr>
+                        <td>{{ obj.from_date }}</td>
+                        <td>{{ obj.to_date }}</td>
+                        <td>{{ obj.shift_type }}</td>
+                        <td>{{ obj.task_info }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
 </html>

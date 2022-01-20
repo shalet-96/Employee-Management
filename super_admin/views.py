@@ -508,8 +508,13 @@ def schedule_list(request, empid):
 
 
 def view_schedule(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = WorkSchedule.objects.filter(emp__emp_id=empid)
-    return render(request, "Schedule/view-schedule.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "Schedule/view-schedule.html", context=context)
 
 
 def delete_schedule(request, empid):
