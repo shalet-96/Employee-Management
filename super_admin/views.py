@@ -271,11 +271,11 @@ def cancel_asset_request(request, empid):
 
 
 def request_claim(request, empid):
-    query = Employee.objects.get(emp_id=empid)
+    obj = Employee.objects.get(emp_id=empid)
     if request.method == "POST":
         form = ClaimRequestForm(request.POST)
         if form.is_valid():
-            form.instance.emp = query
+            form.instance.emp = obj
             form.instance.status = 'Pending'
             form.save()
             return redirect("view-claim-request", pk=empid)
@@ -283,14 +283,20 @@ def request_claim(request, empid):
         form = ClaimRequestForm()
         context = {
             'form': form,
-            'empid': empid
+            'empid': empid,
+            'obj': obj,
         }
         return render(request, "claim/request-claim.html", context=context)
 
 
 def view_claim_request(request, pk):
+    obj = Employee.objects.get(emp_id=pk)
     query = ClaimManagement.objects.filter(emp__emp_id=pk)
-    return render(request, "claim/view-claim-request.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj,
+    }
+    return render(request, "claim/view-claim-request.html", context=context)
 
 
 def cancel_claim_request(request, empid):
