@@ -39,8 +39,8 @@ urlpatterns = [
     # manager
     path(r'manager-home/(?P<pk>\d+)/$', views_a.manager_home, name="manager-home"),
     path('view-requests/<str:empid>', views_a.view_emp_leave_request, name='view-requests'),
-    path('approve-leave/<str:empid>', views_a.approve_leave),
-    path('reject-leave/<str:empid>', views_a.reject_leave),
+    path('approve-leave/<str:empid>/<str:manid>', views_a.approve_leave, name='approve-leave'),
+    path('reject-leave/<str:empid>/<str:manid>', views_a.reject_leave, name='reject-leave'),
 
     path('view-submit-task/<str:empid>', views_a.view_submitted_task, name='view-submit-task'),
     path('approve-task/<str:empid>', views_a.approve_task),

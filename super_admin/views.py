@@ -419,20 +419,20 @@ def view_emp_leave_request(request, empid):
     return render(request, "leave/view-requests.html", context=context)
 
 
-def approve_leave(request, empid):
+def approve_leave(request, empid, manid):
     obj = LeaveManagement.objects.get(id=empid)
     obj.approved_rejected = True
     obj.status = 'Approved'
     obj.save()
-    return redirect("/view-requests")
+    return redirect("view-requests", empid=manid)
 
 
-def reject_leave(request, empid):
+def reject_leave(request, empid, manid):
     obj = LeaveManagement.objects.get(id=empid)
     obj.approved_rejected = False
     obj.status = 'Rejected'
     obj.save()
-    return redirect("/view-requests")
+    return redirect("view-requests", empid=manid)
 
 
 def show_asset_request(request, empid):

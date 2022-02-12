@@ -43,7 +43,7 @@
             <table style=" width: 90%" class="table table-striped table-dark">
                 <thead class="bg-secondary">
                 <tr>
-                    <th>Emp ID</th>
+                    <th>Employee Name</th>
                     <th>From Date</th>
                     <th>To date</th>
                     <th>Reason</th>
@@ -53,15 +53,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for obj in query %}
+                {% for ob in query %}
                     <tr>
-                        <td>{{ obj.emp_id.emp_id }}</td>
-                        <td>{{ obj.from_date }}</td>
-                        <td>{{ obj.to_date }}</td>
-                        <td>{{ obj.reason }}</td>
-                        <td>{{ obj.request_date }}</td>
+                        <td>{{ ob.emp_id.first_name }}</td>
+                        <td>{{ ob.from_date }}</td>
+                        <td>{{ ob.to_date }}</td>
+                        <td>{{ ob.reason }}</td>
+                        <td>{{ ob.request_date }}</td>
                         <td>
-                            {{ obj.status }}
+                            {{ ob.status }}
                         </td>
                         {#            {% if obj.approved_rejected %}#}
                         {#                <td>Approved</td>#}
@@ -69,9 +69,9 @@
                         <td>
 
                             <button class="btn btn-success btn-sm"
-                                    onclick="location.href='/approve-leave/{{ obj.id }}'">Approve
+                                    onclick="location.href='/approve-leave/{{ ob.id }}/{{ obj.emp_id }}'">Approve
                             </button>
-                            <button class="btn btn-danger btn-sm" onclick="location.href='/reject-leave/{{ obj.id }}'">
+                            <button class="btn btn-danger btn-sm" onclick="location.href='/reject-leave/{{ ob.id }}/{{ obj.emp_id }}'">
                                 Reject
                             </button>
                             {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
