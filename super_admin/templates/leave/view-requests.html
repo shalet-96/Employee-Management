@@ -63,9 +63,7 @@
                         <td>
                             {{ ob.status }}
                         </td>
-                        {#            {% if obj.approved_rejected %}#}
-                        {#                <td>Approved</td>#}
-                        {#            {% endif %}#}
+                        {% if ob.status == "Pending" %}
                         <td>
 
                             <button class="btn btn-success btn-sm"
@@ -76,6 +74,9 @@
                             </button>
                             {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
                         </td>
+                    {% else %}
+                    <td>No Action</td>
+                    {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
