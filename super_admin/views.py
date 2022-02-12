@@ -381,13 +381,13 @@ def submit_task(request, pk):
     return redirect("view-task-list", empid=obj.emp.emp_id)
 
 
-def approve_task(request, empid):
+def approve_task(request, empid, manid):
     obj = TaskManagement.objects.get(id=empid)
     obj.is_approved = True
     obj.status = 'Approved'
     obj.approved_date = datetime.now()
     obj.save()
-    return redirect("/view-submit-task")
+    return redirect("view-submit-task", empid=manid)
 
 
 def view_submitted_task(request, empid):
@@ -400,13 +400,13 @@ def view_submitted_task(request, empid):
     return render(request, "Task/view-submitted-tasks.html", context=context)
 
 
-def reject_task(request, empid):
+def reject_task(request, empid, manid):
     obj = TaskManagement.objects.get(id=empid)
     obj.is_approved = False
     obj.status = 'Rejected'
     obj.approved_date = datetime.now()
     obj.save()
-    return redirect("/view-submit-task")
+    return redirect("view-submit-task", empid=manid)
 
 
 def view_emp_leave_request(request, empid):

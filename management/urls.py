@@ -43,8 +43,8 @@ urlpatterns = [
     path('reject-leave/<str:empid>/<str:manid>', views_a.reject_leave, name='reject-leave'),
 
     path('view-submit-task/<str:empid>', views_a.view_submitted_task, name='view-submit-task'),
-    path('approve-task/<str:empid>', views_a.approve_task),
-    path('reject-task/<str:empid>', views_a.reject_task),
+    path('approve-task/<str:empid>/<str:manid>', views_a.approve_task, name='approve-task'),
+    path('reject-task/<str:empid>/<str:manid>', views_a.reject_task, name='reject-task'),
 
     path('show-asset-request/<str:empid>', views_a.show_asset_request, name='show-asset-request'),
     path('approve-asset-request/<str:empid>', views_a.approve_asset_request),
