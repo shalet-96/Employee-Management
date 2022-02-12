@@ -459,25 +459,30 @@ def reject_asset_request(request, empid, manid):
     return redirect("show-asset-request", empid=manid)
 
 
-def show_claim_request(request):
+def show_claim_request(request, empid):
+    obj = Employee.objects.get(emp_id=empid)
     query = ClaimManagement.objects.all()
-    return render(request, "Claim/show-claim-requests.html", {'query': query})
+    context = {
+        'query': query,
+        'obj': obj
+    }
+    return render(request, "Claim/show-claim-requests.html", context=context)
 
 
-def approve_claim_request(request, empid):
+def approve_claim_request(request, empid, manid):
     obj = ClaimManagement.objects.get(id=empid)
     obj.status = 'Approved'
     obj.approved_date = datetime.now()
     obj.save()
-    return redirect("/show-claim-request")
+    return redirect("show-claim-request", empid=manid)
 
 
-def reject_claim_request(request, empid):
+def reject_claim_request(request, empid, manid):
     obj = ClaimManagement.objects.get(id=empid)
     obj.status = 'Rejected'
     obj.approved_date = datetime.now()
     obj.save()
-    return redirect("/show-claim-request")
+    return redirect("show-claim-request", empid=manid)
 
 
 def create_schedule(request, empid):
