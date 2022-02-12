@@ -47,8 +47,8 @@ urlpatterns = [
     path('reject-task/<str:empid>/<str:manid>', views_a.reject_task, name='reject-task'),
 
     path('show-asset-request/<str:empid>', views_a.show_asset_request, name='show-asset-request'),
-    path('approve-asset-request/<str:empid>', views_a.approve_asset_request),
-    path('reject-asset-request/<str:empid>', views_a.reject_asset_request),
+    path('approve-asset-request/<str:empid>/<str:manid>', views_a.approve_asset_request, name='approve-asset-request'),
+    path('reject-asset-request/<str:empid>/<str:manid>', views_a.reject_asset_request, name='reject-asset-request'),
 
     path('show-claim-request', views_a.show_claim_request, name='show-claim-request'),
     path('approve-claim-request/<str:empid>', views_a.approve_claim_request),

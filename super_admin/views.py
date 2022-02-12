@@ -445,18 +445,18 @@ def show_asset_request(request, empid):
     return render(request, "Asset/show-asset-request.html", context=context)
 
 
-def approve_asset_request(request, empid):
+def approve_asset_request(request, empid, manid):
     obj = AssetRequest.objects.get(id=empid)
     obj.status = 'Approved'
     obj.save()
-    return redirect("/show-asset-request")
+    return redirect("show-asset-request", empid=manid)
 
 
-def reject_asset_request(request, empid):
+def reject_asset_request(request, empid, manid):
     obj = AssetRequest.objects.get(id=empid)
     obj.status = 'Rejected'
     obj.save()
-    return redirect("/show-asset-request")
+    return redirect("show-asset-request", empid=manid)
 
 
 def show_claim_request(request):

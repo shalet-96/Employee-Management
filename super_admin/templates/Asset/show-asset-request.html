@@ -50,18 +50,22 @@
                 </tr>
                 </thead>
                 <tbody>
-        {% for obj in query %}
+        {% for ob in query %}
         <tr>
-          <td>{{obj.item}}</td>
-          <td>{{obj.purpose}}</td>
-          <td>{{obj.request_date}}</td>
-          <td>{{obj.status}}</td>
+          <td>{{ob.item}}</td>
+          <td>{{ob.purpose}}</td>
+          <td>{{ob.request_date}}</td>
+          <td>{{ob.status}}</td>
+            {% if ob.status == 'Pending' %}
           <td>
-
-            <button class="btn-info btn-sm" onclick="location.href='/approve-asset-request/{{obj.id}}'">Approve</button>
-            <button class="btn-danger btn-sm" onclick="location.href='/reject-asset-request/{{obj.id}}'">Reject</button>
+            <button class="btn-info btn-sm" onclick="location.href='/approve-asset-request/{{ob.id}}/{{ obj.emp_id }}'">Approve</button>
+            <button class="btn-danger btn-sm" onclick="location.href='/reject-asset-request/{{ob.id}}/{{ obj.emp_id }}'">Reject</button>
 {#            <button class="btn-success btn-sm" onclick="location.href='/edit-emp/{{emp.emp_id}}'">Update</button>#}
           </td>
+                {% else %}
+                <td>No Action</td>
+        {% endif %}
+
         </tr>
         {% endfor %}
       </tbody>
