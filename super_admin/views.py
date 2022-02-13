@@ -7,7 +7,8 @@ from datetime import datetime
 # Create your views here.
 from .models import LeaveManagement, Employee, AssetManagement, AssetRequest, ClaimManagement, TaskManagement, \
     WorkSchedule
-
+from django.core.mail import send_mail
+from django.contrib import messages
 
 def loginCheck(request):
     if request.method == 'POST':
@@ -318,7 +319,6 @@ def add_task(request, empid):
         if form.is_valid():
             form.instance.emp = obj
             form.save()
-            print('############ form saved')
             return redirect("view-task-list", empid=empid)
     else:
         form = TaskSubmissionForm()
@@ -354,15 +354,10 @@ def edit_task(request, empid):
 
 
 def update_task(request, empid):
-    print('UPDATES')
     obj = TaskManagement.objects.get(id=empid)
     query = Employee.objects.get(emp_id=obj.emp.emp_id)
-    print('OBJJJJ', obj)
     form = TaskSubmissionForm(request.POST or None, instance=obj)
-    print('FORM', form)
-    print('form###', form.is_valid())
     if form.is_valid():
-        print('TRUE', form.is_valid())
         form.save()
         return redirect("view-task-list", empid=obj.emp.emp_id)
     return render(request, "Task/edit-task.html", {'obj': obj})
@@ -424,6 +419,14 @@ def approve_leave(request, empid, manid):
     obj.approved_rejected = True
     obj.status = 'Approved'
     obj.save()
+    subject = 'Leave Approved'
+    message = 'Your leave application has been approved'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("view-requests", empid=manid)
 
 
@@ -432,6 +435,14 @@ def reject_leave(request, empid, manid):
     obj.approved_rejected = False
     obj.status = 'Rejected'
     obj.save()
+    subject = 'Leave Rejected'
+    message = 'Your leave application has been Rejected'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("view-requests", empid=manid)
 
 
@@ -449,6 +460,14 @@ def approve_asset_request(request, empid, manid):
     obj = AssetRequest.objects.get(id=empid)
     obj.status = 'Approved'
     obj.save()
+    subject = 'Asset Request Status'
+    message = 'Your asset request has been approved'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("show-asset-request", empid=manid)
 
 
@@ -456,6 +475,14 @@ def reject_asset_request(request, empid, manid):
     obj = AssetRequest.objects.get(id=empid)
     obj.status = 'Rejected'
     obj.save()
+    subject = 'Asset Request Status'
+    message = 'Your asset request has been rejected'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("show-asset-request", empid=manid)
 
 
@@ -474,6 +501,14 @@ def approve_claim_request(request, empid, manid):
     obj.status = 'Approved'
     obj.approved_date = datetime.now()
     obj.save()
+    subject = 'Claim Request Status'
+    message = 'Your claim request has been approved'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("show-claim-request", empid=manid)
 
 
@@ -482,6 +517,14 @@ def reject_claim_request(request, empid, manid):
     obj.status = 'Rejected'
     obj.approved_date = datetime.now()
     obj.save()
+    subject = 'Claim Request Status'
+    message = 'Your claim request has been rejected'
+    from_email = 'Admin@gmail.com'
+    to_email = obj.emp_id.email
+    try:
+        send_mail(subject, message, from_email, recipient_list=[to_email])
+    except Exception as e:
+        print('FAILE MAIL', e)
     return redirect("show-claim-request", empid=manid)
 
 
@@ -491,8 +534,19 @@ def create_schedule(request, empid):
         form = WorkScheduleForm(request.POST)
         if form.is_valid():
             try:
+                emp = form.cleaned_data['emp']
+                obj = Employee.objects.get(username=emp)
+                email = obj.email
                 form.save()
-                return redirect("view-schedule-list")
+                subject = 'Work Schedule Updated'
+                message = 'Your work schedule updated for this week. Kindly check.'
+                from_email = 'Admin@gmail.com'
+                to_email = email
+                try:
+                    send_mail(subject, message, from_email, recipient_list=[to_email])
+                except Exception as e:
+                    print('FAILE MAIL', e)
+                return redirect("view-schedule-list", empid=empid)
             except Exception as e:
                 pass
     else:
@@ -501,6 +555,7 @@ def create_schedule(request, empid):
         context = {
             'form': form,
             'obj': obj,
+            'empid': empid
         }
     return render(request, "Schedule/create-schedule.html", context=context)
 
@@ -525,23 +580,23 @@ def view_schedule(request, empid):
     return render(request, "Schedule/view-schedule.html", context=context)
 
 
-def delete_schedule(request, empid):
+def delete_schedule(request, empid, manid):
     obj = WorkSchedule.objects.get(id=empid)
     obj.delete()
-    return redirect("view-schedule-list")
+    return redirect("view-schedule-list", empid=manid)
 
 
 def edit_schedule(request, empid):
-    print("edit", empid)
     obj = WorkSchedule.objects.get(id=empid)
-    form = WorkScheduleForm(request.POST or None, instance=obj)
-    return render(request, "Schedule/edit-schedule.html", {'form': form})
+    # form = WorkScheduleForm(request.POST or None, instance=obj)
+    return render(request, "Schedule/edit-schedule.html", {'obj': obj})
 
 
 def update_schedule(request, empid):
     obj = WorkSchedule.objects.get(id=empid)
+    query = Employee.objects.get(emp_id=obj.emp.emp_id)
     form = WorkScheduleForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        return redirect("view-schedule-list")
-    return render(request, "Schedule/edit-schedule.html", {'form': form})
+        return redirect("view-schedule-list", empid=obj.emp.emp_id)
+    return render(request, "Schedule/edit-schedule.html", {'obj': obj})

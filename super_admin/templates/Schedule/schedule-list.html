@@ -52,20 +52,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for obj in query %}
+                {% for ob in query %}
                     <tr>
-                      <td>{{obj.emp.first_name}}</td>
-                      <td>{{obj.from_date}}</td>
-                      <td>{{obj.to_date}}</td>
-                      <td>{{obj.shift_type}}</td>
-                      <td>{{obj.task_info}}</td>
-                      <td>{{obj.is_scheduled}}</td>
+                      <td>{{ob.emp.first_name}}</td>
+                      <td>{{ob.from_date}}</td>
+                      <td>{{ob.to_date}}</td>
+                      <td>{{ob.shift_type}}</td>
+                      <td>{{ob.task_info}}</td>
+                      <td>{{ob.is_scheduled}}</td>
                       <td>
 
                           <span class="btn btn-light"><span style="padding-right: 5px"><i
-                                    onclick="location.href='/edit-schedule/{{ obj.id }}'"
+                                    onclick="location.href='/edit-schedule/{{ ob.id }}'"
                                     class="bi bi-pencil-fill"></i></span>&nbsp;<span><i
-                                    onclick="location.href='/delete-schedule/{{ obj.id }}'"
+                                    onclick="location.href='/delete-schedule/{{ ob.id }}/{{ obj.emp_id }}'"
                                     class="bi bi-trash-fill"></i></span></span>
                       </td>
                     </tr>
